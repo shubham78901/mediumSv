@@ -1,9 +1,9 @@
 
 import { Box, styled, Typography, Link } from '@mui/material';
-import { GitHub, Instagram, Email } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email } from '@mui/icons-material';
 
 const Banner = styled(Box)`
-    background-image: url(https://www.wallpapertip.com/wmimgs/23-236943_us-wallpaper-for-website.jpg);
+    background-image: url("blog.png");
     width: 100%;
     height: 50vh;
     background-position: left 0px bottom 0px;
@@ -27,23 +27,22 @@ const About = () => {
         <Box>
             <Banner/>
             <Wrapper>
-                <Typography variant="h3">Code for Interview</Typography>
-                <Text variant="h5">I'm a Software Engineer based in India. 
-                    I've built websites, desktop applications and corporate software.<br />
-                    If you are interested, you can view some of my favorite projects here
+                <Typography variant="h3"></Typography>
+                <Text variant="h5">Embark on a journey where your words, thoughts, and creativity not only find a platform but also earn you crypto rewards! Medium SV isn't just another content-sharing platform.<br />
+                it's a bustling hub where your articles, blogs, podcasts, and even memes can thrive while you reap the rewards in cryptocurrency. Join the revolution where creativity meets crypto, and let your content speak for itself while your wallet grows. Discover the power of Medium SV today!
                     <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://github.com/kunaltyagi9" color="inherit" target="_blank"><GitHub /></Link>
+                        <Link href="https://github.com/shubham78901" color="inherit" target="_blank"><GitHub /></Link>
                     </Box>
                 </Text>
                 <Text variant="h5">
                     Need something built or simply want to have chat? Reach out to me on
                     <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://www.instagram.com/codeforinterview/" color="inherit" target="_blank">
-                            <Instagram />
+                        <Link href="www.linkedin.com/in/shubham-g-01b41a192/" color="inherit" target="_blank">
+                            <LinkedIn />
                         </Link>
                     </Box>  
                         or send me an Email 
-                        <Link href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
+                        <Link href="mailto:ss363757@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
                             <Email />
                         </Link>.
                 </Text>
