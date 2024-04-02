@@ -11,9 +11,13 @@ const StyledTable = styled(Table)`
 const StyledButton = styled(Button)`
     margin: 20px;
     width: 85%;
-    background: #6495ED;
-    color: #fff;
+    background: #54ff0082;
+    color: #000;
     text-decoration: none;
+    font-weight:600;
+    &:hover{
+        background: #15c50f;
+    }
 `;
     
 const StyledLink = styled(Link)`

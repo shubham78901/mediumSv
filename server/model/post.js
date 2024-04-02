@@ -6,6 +6,10 @@ const PostSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    subHeading:{
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true

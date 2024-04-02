@@ -2,16 +2,26 @@
 import { styled, Box, Typography } from '@mui/material';
 
 const Container = styled(Box)`
-    border: 1px solid #d3cede;
+    border: 1px solid #e2e2e2;
     border-radius: 10px;
     margin: 10px;
     display: flex;
-    align-items: center;
     flex-direction: column;
     height: 350px;
     & > img, & > p {
-        padding: 0 5px 5px 5px;
+        ${'' /* padding: 0 5px 5px 5px; */}
     }
+    &:hover{
+        box-shadow:0px 8px 32px 5px rgba(0,0,0, 0.12);
+    }
+`;
+const CardDesc = styled(Box)`
+    padding:4px 10px;
+`;
+const TopDesc = styled(Box)`
+    display:flex;
+    justify-content:space-between;
+    padding-bottom:20px;
 `;
 
 const Image = styled('img')({
@@ -22,18 +32,19 @@ const Image = styled('img')({
 });
 
 const Text = styled(Typography)`
-    color: #878787
-    font-size: 12px;
+    color: #878787;
+    font-size: 15px;
 `;
 
 const Heading = styled(Typography)`
-    font-size: 18px;
-    font-weight: 600
+    font-size: 20px;
+    font-weight: 700;
 `;
 
 const Details = styled(Typography)`
-    font-size: 14px;
+    font-size: 15px;
     word-break: break-word;
+    color: gray;
 `;
 
 const Post = ({ post }) => {
@@ -46,10 +57,25 @@ const Post = ({ post }) => {
     return (
         <Container>
             <Image src={url} alt="post" />
+            <CardDesc>
+            <TopDesc>
+
+            <Text
+            style={{
+                display:"flex",
+            }}
+            >Author: {post.username}</Text>
             <Text>{post.categories}</Text>
-            <Heading>{addEllipsis(post.title, 20)}</Heading>
-            <Text>Author: {post.username}</Text>
+            
+            </TopDesc>
+            <Heading
+            style={{
+                display:"flex",
+                marginBottom:"10px",
+            }}
+            >{addEllipsis(post.title, 20)}</Heading>
             <Details>{addEllipsis(post.description, 100)}</Details>
+            </CardDesc>
         </Container>
     )
 }

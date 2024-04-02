@@ -111,7 +111,26 @@ const ProcessError = async (error) => {
     }
 }
 
-const API = {};
+const API = {
+    // uploadFile: (data, showUploadProgress) => {
+
+    //     return axiosInstance({
+    //         method: SERVICE_URLS.uploadFile.method,
+    //         url: SERVICE_URLS.uploadFile.url,
+    //         data: data,
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //             authorization: getAccessToken(),
+    //         },
+    //         onUploadProgress: function(progressEvent) {
+    //             if (showUploadProgress) {
+    //                 let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+    //                 showUploadProgress(percentCompleted);
+    //             }
+    //         },
+    //     });
+    // },
+};
 
 for (const [key, value] of Object.entries(SERVICE_URLS)) {
     API[key] = (body, showUploadProgress, showDownloadProgress) =>
