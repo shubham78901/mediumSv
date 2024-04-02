@@ -158,8 +158,8 @@ const Login = ({ isUserAuthenticated }) => {
     return (
         <Component>
             <Box>
-                <Div>MediumSv</Div>
-                <Paragraph>create your article with us</Paragraph>
+                <Div>mediumSv</Div>
+                <Paragraph>Tap into the Technological Marvel of Blockchain for Boundless Opportunities!</Paragraph>
                 {/* <Image src={imageURL} alt="blog" /> */}
                 {
                     account === 'login' ?
