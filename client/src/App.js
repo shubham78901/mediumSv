@@ -13,13 +13,15 @@ import Update from './components/create/Update';
 import About from './components/about/About';
 import Contact from './components/contact/Contact';
 import Login from './components/account/Login';
+import Footer from './components/footer/Footer';
 
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
   const token = sessionStorage.getItem('accessToken');
-  return isAuthenticated && token ? 
+  return isAuthenticated || token ? 
     <>
       <Header />
       <Outlet />
+      <Footer/>
     </> : <Navigate replace to='/account' />
 };
 
@@ -30,7 +32,7 @@ function App() {
   return (
     <DataProvider>
       <BrowserRouter>
-        <Box style={{ marginTop: 64 }}>
+        <Box style={{ marginTop: 64, paddingBottom:"100px" }}>
           <Routes>
             <Route path='/account' element={<Login isUserAuthenticated={isUserAuthenticated} />} />
             
