@@ -9,7 +9,7 @@ import { API } from '../../../service/api';
 import Comment from './Comment';
 
 const Container = styled(Box)`
-    margin-top: 100px;
+    margin: 100px 20px 0px 20px;
     display: flex;
 `;
 
@@ -23,6 +23,8 @@ const StyledTextArea = styled(TextareaAutosize)`
     height: 100px !important;
     width: 100%; 
     margin: 0 20px;
+    border-radius:7px;
+    padding:15px;
 `;
 
 const initialValue = {
@@ -83,13 +85,16 @@ const Comments = ({ post }) => {
                 />
                 <Button 
                     variant="contained" 
-                    color="primary" 
                     size="medium" 
-                    style={{ height: 40 }}
+                    style={{ height: 40, background:"rgb(67, 185, 67)", }}
                     onClick={(e) => addComment(e)}
                 >Post</Button>             
             </Container>
-            <Box>
+            <Box
+            style={{
+                marginTop:"30px",
+            }} 
+            >
                 {
                     comments && comments.length > 0 && comments.map(comment => (
                         <Comment comment={comment} setToggle={setToggle} />

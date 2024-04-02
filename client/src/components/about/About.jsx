@@ -30,6 +30,8 @@ const Heading = styled(Box)`
   font-size: 3.5rem;
   color: white;
   font-weight: 700;
+  ${'' /* padding-bottom:2px; */}
+  border-bottom: 2px solid rgb(10 148 205);
 `;
 
 const Subheading = styled(Box)`
@@ -122,7 +124,7 @@ const About = () => {
               display: "flex",
               width: "fit-content",
               margin: "5px 0px 20px 0px",
-              borderBottom: "2px solid red",
+              borderBottom: "2px solid rgb(10 148 205)",
             }}
           >
             We are Coder
@@ -158,7 +160,7 @@ const About = () => {
               display: "flex",
               width: "fit-content",
               margin: "5px 0px 20px 0px",
-              borderBottom: "2px solid red",
+              borderBottom: "2px solid rgb(10 148 205)",
             }}
           >
             Owr motive
@@ -194,7 +196,7 @@ const About = () => {
             display: "flex",
             width: "fit-content",
             margin: "5px 0px 20px 0px",
-            borderBottom: "2px solid red",
+            borderBottom: "2px solid rgb(10 148 205)",
           }}
         >
           Our Team

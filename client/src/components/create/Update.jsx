@@ -8,6 +8,7 @@ import { API } from '../../service/api';
 
 const Container = styled(Box)(({ theme }) => ({
     margin: '50px 100px',
+    marginTop:"66px",
     [theme.breakpoints.down('md')]: {
         margin: 0
     }
@@ -22,20 +23,28 @@ const Image = styled('img')({
 const StyledFormControl = styled(FormControl)`
     margin-top: 10px;
     display: flex;
+    justify-content:center;
+    align-items:center;
     flex-direction: row;
 `;
 
 const InputTextField = styled(InputBase)`
     flex: 1;
-    margin: 0 30px;
-    font-size: 25px;
+    margin: 0 20px;
+    font-size: 24px;
+    border: 1px solid #e2e2e2;
+    border-radius:7px;
+    padding:2px 15px;
 `;
 
 const StyledTextArea = styled(TextareaAutosize)`
-    width: 100%;
-    border: none;
+    width: calc(100% - 27px);
+    border: 1px solid #e2e2e2;
+    border-radius:7px;
     margin-top: 50px;
     font-size: 18px;
+    padding:15px;
+    font-family: emoji;
     &:focus-visible {
         outline: none;
     }
@@ -59,7 +68,7 @@ const Update = () => {
 
     const { id } = useParams();
 
-    const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
+    const url = 'https://images.unsplash.com/photo-1707343843982-f8275f3994c5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
     
     useEffect(() => {
         const fetchData = async () => {
@@ -112,7 +121,9 @@ const Update = () => {
                     onChange={(e) => setFile(e.target.files[0])}
                 />
                 <InputTextField onChange={(e) => handleChange(e)} value={post.title} name='title' placeholder="Title" />
-                <Button onClick={() => updateBlogPost()} variant="contained" color="primary">Update</Button>
+                <Button onClick={() => updateBlogPost()} variant="contained" color="primary"
+                style={{ background:"rgb(67, 185, 67)", fontWeight:500, }}
+                >Update</Button>
             </StyledFormControl>
 
             <StyledTextArea

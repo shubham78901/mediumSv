@@ -7,9 +7,11 @@ import { API } from '../../../service/api';
 import { DataContext } from "../../../context/DataProvider";
 
 const Component = styled(Box)`
-    margin-top: 30px;
-    background: #F5F5F5;
+    margin: 10px 20px 0 20px;
+    background: #eff9fa;
     padding: 10px;
+    border:1px solid #e2e2e2;
+    border-radius:7px;
 `;
 
 const Container = styled(Box)`
@@ -18,14 +20,16 @@ const Container = styled(Box)`
 `;
 
 const Name = styled(Typography)`
-    font-weight: 600,
+    font-weight: 600;
     font-size: 18px;
     margin-right: 20px;
+    font-family: "monospace";
 `;
 
 const StyledDate = styled(Typography)`
-    font-size: 14px;
+    font-size: 16px;
     color: #878787;
+    font-family: "monospace";
 `;
 
 const DeleteIcon = styled(Delete)`
@@ -48,7 +52,14 @@ const Comment = ({ comment, setToggle }) => {
                 <StyledDate>{new Date(comment.date).toDateString()}</StyledDate>
                 { comment.name === account.username && <DeleteIcon onClick={() => removeComment()} /> }
             </Container>
-            <Typography>{comment.comments}</Typography>
+            <Typography
+            style={{
+                padding:"5px 20px",
+                color:"gray",
+                fontFamily: "fangsong",
+                fontSize:"18px",
+            }}
+            >{comment.comments}</Typography>
         </Component>
     )
 }

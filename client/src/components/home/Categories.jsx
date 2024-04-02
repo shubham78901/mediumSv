@@ -11,12 +11,13 @@ const StyledTable = styled(Table)`
 const StyledButton = styled(Button)`
     margin: 20px;
     width: 85%;
-    background: #54ff0082;
+    background: linear-gradient(to right, rgb(79, 232, 214) , rgb(98, 172, 236));
     color: #000;
     text-decoration: none;
     font-weight:600;
     &:hover{
-        background: #15c50f;
+        background: linear-gradient(to right, rgb(98, 172, 236), rgb(79, 232, 214) );
+        color:white;
     }
 `;
     

@@ -6,6 +6,7 @@ const Container = styled(Box)`
     border-radius: 10px;
     margin: 10px;
     display: flex;
+    background:white;
     flex-direction: column;
     height: 350px;
     & > img, & > p {

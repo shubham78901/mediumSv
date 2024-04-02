@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import { TextField, Box, Button, Typography, styled } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
@@ -99,6 +99,8 @@ const Login = ({ isUserAuthenticated }) => {
     const [signup, setSignup] = useState(signupInitialValues);
     const [error, showError] = useState('');
     const [account, toggleAccount] = useState('login');
+    const [searchParams] = useSearchParams();
+    const category = searchParams.get('category');
 
     const navigate = useNavigate();
     const { setAccount } = useContext(DataContext);
@@ -124,7 +126,7 @@ const Login = ({ isUserAuthenticated }) => {
 
     const loginUser = async () => {
         let response = await API.userLogin(login);
-        console.log(response)
+        
         if (response.isSuccess) {
             showError('');
 
@@ -134,7 +136,7 @@ const Login = ({ isUserAuthenticated }) => {
             
             isUserAuthenticated(true)
             setLogin(loginInitialValues);
-            navigate('/about');
+            navigate(`/create?category=${category || ''}`);
         } else {
             showError('Something went wrong! please try again later');
         }
@@ -142,6 +144,7 @@ const Login = ({ isUserAuthenticated }) => {
 
     const signupUser = async () => {
         let response = await API.userSignup(signup);
+        console.log("resp",response)
         if (response.isSuccess) {
             showError('');
             setSignup(signupInitialValues);
@@ -158,7 +161,7 @@ const Login = ({ isUserAuthenticated }) => {
     return (
         <Component>
             <Box>
-                <Div>MediumSv</Div>
+                <Div>mediumSv</Div>
                 <Paragraph>create your article with us</Paragraph>
                 {/* <Image src={imageURL} alt="blog" /> */}
                 {

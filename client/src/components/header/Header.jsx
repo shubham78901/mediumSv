@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Component = styled(AppBar)`
-    background: linear-gradient(to bottom, black, #800000);
-    ${'' /* background: #800000; */}
+    background: linear-gradient(to bottom, rgba(79, 232, 214) , rgba(98, 172, 236)); 
     color: white;
     
 `;
@@ -16,14 +15,14 @@ const Container = styled(Toolbar)`
     justify-content: center;
     & > a {
         padding: 20px;
-        color: #fff;
+        color: #000;
         text-decoration: none;
         font-size: 1.2rem;
-        font-family: "Butterfly Kids", cursive;
+        font-family: cursive;
         font-weight: 700;
         letter-spacing: 5px;
         &:hover{
-            color:aqua;
+            color:white;
         }
         
     }
@@ -45,7 +44,7 @@ const Header = () => {
         <Component>
             <Container>
                 <Link to='/'>HOME</Link>
-                <Link to='/about'>ABOUT</Link>
+                {/* <Link to='/about'>ABOUT</Link> */}
                 <Link to='/contact'>CONTACT</Link>
                 <Link to='/account' onClick={logout}>LOGOUT</Link>
             </Container>

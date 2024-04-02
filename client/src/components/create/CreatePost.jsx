@@ -68,14 +68,15 @@ const InputTextField = styled(InputBase)`
 `;
 
 const Textarea = styled(TextareaAutosize)`
-  width: 97%;
+  width: calc(100% - 30px);
   margin: 25px 0px;
-  display: "flex";
+  display: flex;
+  height: 100px !important;
   flex-wrap: wrap;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 15px 20px;
-  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.20);
+  padding: 15px 15px;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.20);
   font-size: 15px;
   &:focus-visible {
     outline: none;
@@ -182,8 +183,8 @@ const CreatePost = () => {
             width: "100%",
             border: "1px solid black",
             borderRadius: "5px",
-            padding: "10px 20px",
-            boxShadow: "0 5px 4px 0 rgba(0, 0, 0, 0.20)",
+            padding: "0px 20px",
+            boxShadow: "0 3px 4px 0 rgba(0, 0, 0, 0.20)",
           }}
         />
       </StyledFormControlOne>
@@ -197,8 +198,8 @@ const CreatePost = () => {
             flex:3,
             border: "1px solid black",
             borderRadius: "5px",
-            padding: "5px 20px",
-            boxShadow: "0 5px 4px 0 rgba(0, 0, 0, 0.20)",
+            padding: "0px 20px",
+            boxShadow: "0 3px 4px 0 rgba(0, 0, 0, 0.20)",
             fontSize: "18px",
           }}
         />
@@ -211,8 +212,8 @@ const CreatePost = () => {
             flex:1,
             border: "1px solid black",
             borderRadius: "5px",
-            padding: "5px 18px",
-            boxShadow: "0 5px 4px 0 rgba(0, 0, 0, 0.20)",
+            padding: "0px 18px",
+            boxShadow: "0 3px 4px 0 rgba(0, 0, 0, 0.20)",
             margin: "0 10px",
             fontSize: "18px",
           }}
@@ -226,8 +227,8 @@ const CreatePost = () => {
             flex:1,
             border: "1px solid black",
             borderRadius: "5px",
-            padding: "5px 18px",
-            boxShadow: "0 5px 4px 0 rgba(0, 0, 0, 0.20)",
+            padding: "0px 18px",
+            boxShadow: "0 3px 4px 0 rgba(0, 0, 0, 0.20)",
             fontSize: "18px",
           }}
         />
@@ -241,37 +242,46 @@ const CreatePost = () => {
             flex:1,
             border: "1px solid black",
             borderRadius: "5px",
-            padding: "5px 18px",
+            padding: "0px 18px",
             paddingRight:"40px",
             marginLeft: "10px",
-            boxShadow: "0 5px 4px 0 rgba(0, 0, 0, 0.20)",
+            boxShadow: "0 3px 4px 0 rgba(0, 0, 0, 0.20)",
             fontSize: "15px",
           }}
         />
         <img src={coffee} alt="coffee" style={{
             width:"40px",
-            height:"35px",
+            height:"30px",
             display:"flex",
             position:"absolute",
             right:"4px",
             background:"transparent",
-            marginTop:"6px"
+            marginTop:"3px"
         }}/>
       </StyledFormControlTwo>
 
       <Textarea
-        // rowsMin={5}
+        rowsMin={5}
         placeholder="Tell your story..."
         name="description"
         onChange={(e) => handleChange(e)}
       />
       
-      <Button onClick={() => savePost()} variant="contained" color="primary"
+      <Button onClick={() => savePost()} variant="contained" 
+      sx={{
+          ':hover': {
+            "background": 'red',
+            color: 'white',
+          },
+        }}
       style={{
         display:"Block",
         margin:"auto",
-        padding:"5px 25px"
+        padding:"5px 25px",
+        background: "#43b943",
+        // "&:hover":{backgroundColor:"red"},
       }}
+      // sx={{"&:hover":{backgroundColor:"red"}}}
       >
         Publish
       </Button>
