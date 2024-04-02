@@ -127,18 +127,7 @@ const About = () => {
           >
             We are Coder
           </Subheading>
-          We are Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis
-          totam ex ducimus, voluptatum quia pariatur reprehenderit et maiores
-          vel fugiat minima ad explicabo ipsam consectetur ea? Voluptatem, quod?
-          Natus nihil temporibus impedit non consequuntur nemo cumque, vero
-          voluptatum, consectetur molestiae architecto recusandae praesentium,
-          ut eius quae. Voluptatum esse non itaque aut at accusantium deleniti
-          hic repellat quibusdam, exercitationem omnis quod? Minima, enim
-          praesentium optio molestiae quibusdam, qui sapiente quo perspiciatis
-          excepturi voluptas blanditiis nobis. Eligendi, libero dolor? Nostrum,
-          dolorum perferendis optio voluptas esse quam repellat deleniti?
-          Consectetur sit voluptas, totam minus placeat tenetur cum vitae
-          repudiandae, ipsam rem ullam magni.
+          Embark on a journey where your words, thoughts, and creativity not only find a platform but also earn you crypto rewards! Medium SV isn't just another content-sharing platform; it's a bustling hub where your articles, blogs, podcasts, and even memes can thrive while you reap the rewards in cryptocurrency. Join the revolution where creativity meets crypto, and let your content speak for itself while your wallet grows. Discover the power of Medium SV today!.
         </Text>
         <Text
           variant="h5"
