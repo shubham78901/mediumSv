@@ -53,13 +53,15 @@ const Contact = () => {
                 <Typography variant="h3">Getting in touch is easy!</Typography>    
                 <Text variant="h5">
                     Reach out to me on
-                    <Link href="https://www.instagram.com/codeforinterview/" color="inherit" target="_blank">
+                    <Link href="www.linkedin.com/in/shubham-g-01b41a192" color="inherit" target="_blank">
                         <Instagram/>
                     </Link>
                     or send me an Email 
-                    <Link href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
+                    <Link href="ss363757@gmail.com" target="_blank" color="inherit">
                         <Email />
-                    </Link>.
+                    </Link>
+                 
+                    
                 </Text>
             </Wrapper>
         </Box>
