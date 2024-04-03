@@ -9,21 +9,20 @@ dotenv.config();
 
 export const singupUser = async (request, response) => {
     try {
-        console.log(request.body);
         const { username, email, password } = request.body;
         const user = { username, email, password };
 
-        console.log(email, user.password)
-        const axiosResponse = await axios.post('https://dev.neucron.io/v1/auth/signup', JSON.stringify({
+        const axiosResponse = await axios.post('https://dev.neucron.io/v1/auth/signup',{
             email: email,
             password: user.password
-        }), {
+        }, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+        console.log("signup");
 
-        console.log(axiosResponse);
+        
 
         if (axiosResponse.status === 200) {
             const userData = axiosResponse.data.data; 
@@ -49,36 +48,34 @@ export const singupUser = async (request, response) => {
         } else {
             // Handle other status codes
             return response.status(axiosResponse.status).json({ msg: 'Error while signing up user' });
-        }
+        } 
     } catch (error) {
         console.error(error);
-        return response.status(500).json({ msg: 'User alredy exist' });
-    }
-}
-
-
-
-
-
-
-export const loginUser = async (email, password) => {
-    try {
-        const axiosResponse = await axios.post('https://dev.neucron.io/v1/auth/login', {
-            email: email,
-            password: password
-        });
-
-        // Return the Axios response directly
-        return axiosResponse;
-    } catch (error) {
-        // Handle login error
-        throw error;
+        return response.status(500).json({ msg: 'User already exists' });
     }
 };
 
+export const loginUser = async (request, response) => {
+    const email =request.body.email ;
+    const password =request.body.password ;
+    try {
+        const axiosResponse = await axios.post('https://dev.neucron.io/v1/auth/login', {
+            email:email,
+            password:password
+        });
+        const returnedData=axiosResponse.data;
+        // Return the Axios response data directly
+        // Log response data 
+        return response.status(200).json({ msg: 'Signup successful', data: returnedData });
+    } catch (error) {
+        // Handle login error 
+        throw error;
+    }
+};
+ 
 export const logoutUser = async (request, response) => {
     const token = request.body.token;
     await Token.deleteOne({ token: token });
 
     response.status(204).json({ msg: 'logout successfull' });
-}
+};
