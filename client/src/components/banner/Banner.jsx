@@ -36,15 +36,9 @@ const SubHeading = styled(Typography)`
 const Banner = () => {
     
     return (
-<<<<<<< HEAD
-        <Image>
-            <Heading>mediumSv</Heading>
-            <SubHeading>Unleash Your Creativity and Earn Crypto: Dive into the World of Medium SV!</SubHeading>
-=======
         <Image >
             <Heading>mediumSv</Heading>
             <SubHeading>Subheading</SubHeading>
->>>>>>> 69f33a480ccf997696320e2d760b557b2561c54b
         </Image>
     )
 }
