@@ -32,6 +32,7 @@ const Heading = styled(Box)`
   font-weight: 700;
   ${'' /* padding-bottom:2px; */}
   border-bottom: 2px solid rgb(10 148 205);
+  border-radius:7px;
 `;
 
 const Subheading = styled(Box)`
@@ -125,6 +126,7 @@ const About = () => {
               width: "fit-content",
               margin: "5px 0px 20px 0px",
               borderBottom: "2px solid rgb(10 148 205)",
+              borderRadius:"7px",
             }}
           >
             We are Coder
@@ -150,6 +152,7 @@ const About = () => {
               width: "fit-content",
               margin: "5px 0px 20px 0px",
               borderBottom: "2px solid rgb(10 148 205)",
+              borderRadius:"7px",
             }}
           >
             Owr motive
@@ -186,6 +189,7 @@ const About = () => {
             width: "fit-content",
             margin: "5px 0px 20px 0px",
             borderBottom: "2px solid rgb(10 148 205)",
+            borderRadius:"7px",
           }}
         >
           Our Team
