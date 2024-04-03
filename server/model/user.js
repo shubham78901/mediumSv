@@ -1,14 +1,16 @@
+// Import necessary modules
 import mongoose from 'mongoose';
 
-const userSchema = mongoose.Schema({
+// Define the user schema
+const userSchema = new mongoose.Schema({
     email: {
-        type: String,
-        required: true
-    },
-    username: {
         type: String,
         required: true,
         unique: true
+    },
+    username: {
+        type: String,
+        required: true
     },
     password: {
         type: String,
@@ -16,31 +18,28 @@ const userSchema = mongoose.Schema({
     },
     user_id: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     wallet_id: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     wallet_address: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     pub_key: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     paymail_id: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     }
 });
 
-const user = mongoose.model('user', userSchema);
+// Create the User model
+const User = mongoose.model('User', userSchema);
 
-export default user;
+// Export the User model
+export default User;
