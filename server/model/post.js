@@ -25,7 +25,7 @@ const PostSchema = new Schema({
         required: false
     },
     publishDate: {
-        type: Date
+        type: String
     },
     likeCount: {
         type: Number // Change 'integer' to 'Number'

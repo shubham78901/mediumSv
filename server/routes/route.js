@@ -8,20 +8,28 @@ import { authenticateToken, createNewToken } from '../controller/jwt-controller.
 
 import multer from 'multer';
 
+
+
+const upload = multer({dest:'uploads/'});
+const router = express.Router(); // eslint-disable-line new-cap
+
+/** GET /health-check - Check service health */
+router.post('/create', upload.single('file'), createPost)
+
 // Set up multer storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads'); // Set upload destination
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname); // Set filename
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './uploads'); // Set upload destination
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname); // Set filename
+//     }
+// });
 
 // Create multer instance
-const upload = multer({ storage: storage });
 
-const router = express.Router();
+
+
 
 router.post('/login', loginUser);
 router.post('/signup', singupUser);
@@ -33,8 +41,8 @@ router.post('/create', createPost);
 router.put('/update/:id', authenticateToken, updatePost);
 router.delete('/delete/:id', authenticateToken, deletePost);
 
-router.get('/post/:id', authenticateToken, getPost);
-router.get('/posts', authenticateToken, getAllPosts);
+router.get('/post/:id', getPost);
+router.get('/posts',  getAllPosts);
 
 router.post('/file/upload', upload.single('file'), uploadImage);
 router.get('/file/:filename', getImage);
