@@ -6,7 +6,20 @@ import { newComment, getComments, deleteComment } from '../controller/comment-co
 import { loginUser, singupUser, logoutUser } from '../controller/user-controller.js';
 import { authenticateToken, createNewToken } from '../controller/jwt-controller.js';
 
-import upload from '../utils/upload.js';
+import multer from 'multer';
+
+// Set up multer storage
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads'); // Set upload destination
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname); // Set filename
+    }
+});
+
+// Create multer instance
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 
@@ -16,7 +29,7 @@ router.post('/logout', logoutUser);
 
 router.post('/token', createNewToken);
 
-router.post('/create', authenticateToken, createPost);
+router.post('/create', createPost);
 router.put('/update/:id', authenticateToken, updatePost);
 router.delete('/delete/:id', authenticateToken, deletePost);
 

@@ -34,7 +34,8 @@ export const singupUser = async (request, response) => {
                 wallet_id: userData.wallet_id, 
                 wallet_address: userData.wallet_address, 
                 pub_key: userData.pub_key, 
-                paymail_id: userData.paymail_id 
+                paymail_id: userData.paymail_id,
+                auth_token:userData.access_token 
             });
     
             // Save the user to the database
@@ -54,25 +55,43 @@ export const singupUser = async (request, response) => {
         return response.status(500).json({ msg: 'User already exists' });
     }
 };
-
 export const loginUser = async (request, response) => {
-    const email =request.body.email ;
-    const password =request.body.password ;
+    const email = request.body.email;
+    const password = request.body.password;
+    
     try {
         const axiosResponse = await axios.post('https://dev.neucron.io/v1/auth/login', {
-            email:email,
-            password:password
+            email: email,
+            password: password
         });
-        const returnedData=axiosResponse.data;
-        // Return the Axios response data directly
+
+        const userData = axiosResponse.data.data;
+
+        // Update the authentication token for the logged-in user
+        const updatedAuthToken = userData.access_token;
+
+        // Find the user by email and update the auth_token field
+        const user = await User.findOneAndUpdate(
+            { email: email },
+            { auth_token: updatedAuthToken },
+            { new: true }
+        );
+
+        if (!user) {
+            // User not found in the database
+            return response.status(404).json({ msg: 'User not found' });
+        }
+
         // Log response data 
-        return response.status(200).json({ msg: 'Signup successful', data: returnedData });
+        console.log("User logged in:", userData);
+
+        return response.status(200).json({ msg: 'Login successful', data: userData });
     } catch (error) {
         // Handle login error 
-        throw error;
+        console.error(error);
+        return response.status(500).json({ msg: 'Error during login' });
     }
 };
- 
 export const logoutUser = async (request, response) => {
     const token = request.body.token;
     await Token.deleteOne({ token: token });

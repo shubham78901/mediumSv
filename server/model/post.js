@@ -1,37 +1,61 @@
 import mongoose from 'mongoose';
 
-const PostSchema = mongoose.Schema({
-    title: {
+const { Schema } = mongoose; // Destructure Schema from mongoose
+
+const PostSchema = new Schema({
+    heading: {
         type: String,
-        required: true,
-        unique: true
+       
     },
-    subHeading:{
+    subHeading: {
         type: String,
-        required: true
     },
     description: {
         type: String,
-        required: true
     },
     picture: {
         type: String,
-        required: false
     },
     username: {
         type: String,
-        required: true
+      
     },
     categories: {
         type: Array,
-        required: false   
+        required: false
     },
-    createdDate: {
+    publishDate: {
         type: Date
-    }
+    },
+    likeCount: {
+        type: Number // Change 'integer' to 'Number'
+    },
+    shareCount: {
+        type: Number // Change 'Int' to 'Number'
+    },
+    deployTxid: {
+        type: String
+    },
+    currentTxid: {
+        type: String
+    },
+    fileHex: {
+        type: String
+    },
+    authorPubkey: {
+        type: String
+    },
+    shareReward: {
+        type: Number // Change 'Int' to 'Number'
+    },
+    likeReward: {
+        type: Number // Change 'Int' to 'Number'
+    },
+    content: {
+        type: String
+    },
 });
 
+const Post = mongoose.model('Post', PostSchema);
 
-const post = mongoose.model('post', PostSchema);
-
-export default post;
+export default Post;

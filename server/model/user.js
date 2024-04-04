@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
     paymail_id: {
         type: String,
         required: true
+    },
+    auth_token: {
+        type: String,
+        required: false
     }
 });
 
