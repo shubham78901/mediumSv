@@ -9,12 +9,11 @@ import { authenticateToken, createNewToken } from '../controller/jwt-controller.
 import multer from 'multer';
 
 
-
 const upload = multer({dest:'uploads/'});
 const router = express.Router(); // eslint-disable-line new-cap
 
 /** GET /health-check - Check service health */
-router.post('/create', upload.single('file'), createPost)
+router.post('/create', upload.single('file'),authenticateToken, createPost)
 
 // Set up multer storage
 // const storage = multer.diskStorage({
@@ -29,8 +28,6 @@ router.post('/create', upload.single('file'), createPost)
 // Create multer instance
 
 
-
-
 router.post('/login', loginUser);
 router.post('/signup', singupUser);
 router.post('/logout', logoutUser);
@@ -38,7 +35,6 @@ router.post('/logout', logoutUser);
 router.post('/token', createNewToken);
 
 router.post('/create',authenticateToken, createPost);
-
 router.put('/update/:id', authenticateToken, updatePost);
 router.delete('/delete/:id', authenticateToken, deletePost);
 
@@ -47,7 +43,7 @@ router.get('/posts',  getAllPosts);
 
 router.post('/file/upload', upload.single('file'), uploadImage);
 router.get('/file/:id', getImage);
-
+ 
 router.post('/comment/new', authenticateToken, newComment);
 router.get('/comments/:id', authenticateToken, getComments);
 router.delete('/comment/delete/:id', authenticateToken, deleteComment);

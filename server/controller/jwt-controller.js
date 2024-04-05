@@ -8,20 +8,33 @@ dotenv.config();
 
 export const authenticateToken = (request, response, next) => {
     const authHeader = request.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
     
-    if (token == null) {
+
+    const parts = authHeader.split('.');
+    if (parts == null) {
         return response.status(401).json({ msg: 'token is missing' });
     }
 
-    jwt.verify(token, process.env.ACCESS_SECRET_KEY, (error, user) => {
-        if (error) {
+const encodedPayload = parts[1];
+
+// Decode the payload
+const decodedPayload = atob(encodedPayload);
+
+// Parse the decoded payload as JSON
+const payload = JSON.parse(decodedPayload);
+
+// Now you can access the properties of the payload
+console.log(payload);
+    
+    
+    
+        if (!payload.user_id) {
             return response.status(403).json({ msg: 'invalid token' })
         }
 
-        request.user = user;
+        request.user_id = payload.user_id;
         next();
-    })
+    
 }
 
 export const createNewToken = async (request, response) => {
