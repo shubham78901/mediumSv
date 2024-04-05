@@ -200,7 +200,7 @@ export const getImage = async (request, response) => {
         const { deployTxid} = post;
      console.log("deployTxid",deployTxid)
         // Make an HTTP POST request to the '/data' route
-        const dataResponse = await axios.post('http://localhost:5000/custom/data', {
+        const dataResponse = await axios.post('http://localhost:5000/custom/sendfile', {
             txid: deployTxid,
             outputindex: 0
         });
@@ -210,7 +210,7 @@ export const getImage = async (request, response) => {
 
         // Example response
         
-        response.status(200).json(convertedData);
+        response.status(200).json(dataResponse.data);
     } catch (error) {
         response.status(500).json({ error: error.message });
     }

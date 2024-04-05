@@ -2,7 +2,7 @@ import express from 'express';
 
 import { createPost, updatePost, deletePost, getPost, getAllPosts,getImage } from '../controller/post-controller.js';
 import { uploadImage } from '../controller/image-controller.js';
-import { newComment, getComments, deleteComment } from '../controller/comment-controller.js';
+import {  likePost} from '../controller/like-controller.js';
 import { loginUser, singupUser, logoutUser } from '../controller/user-controller.js';
 import { authenticateToken, createNewToken } from '../controller/jwt-controller.js';
 
@@ -45,11 +45,11 @@ router.delete('/delete/:id', authenticateToken, deletePost);
 router.get('/post/:id', getPost);
 router.get('/posts',  getAllPosts);
 
-router.post('/file/upload', upload.single('file'), uploadImage);
+// router.post('/file/upload', upload.single('file'), uploadImage);
 router.get('/file/:id', getImage);
 
-router.post('/comment/new', authenticateToken, newComment);
-router.get('/comments/:id', authenticateToken, getComments);
-router.delete('/comment/delete/:id', authenticateToken, deleteComment);
+// router.post('/comment/new', authenticateToken, newComment);
+router.get('/like/:id', likePost);
+// router.delete('/comment/delete/:id', authenticateToken, deleteComment);
 
 export default router;
