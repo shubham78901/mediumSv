@@ -3,9 +3,13 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose; // Destructure Schema from mongoose
 
 const PostSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+        unique: true // Ensure uniqueness if needed
+    },
     heading: {
         type: String,
-       
     },
     subHeading: {
         type: String,
@@ -18,7 +22,6 @@ const PostSchema = new Schema({
     },
     username: {
         type: String,
-      
     },
     categories: {
         type: Array,

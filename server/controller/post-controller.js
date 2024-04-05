@@ -6,6 +6,17 @@ import multer from 'multer';
 import fs from 'fs';
 import path from 'path'; 
 
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+
+    return result;
+}
 
 
 
@@ -27,7 +38,7 @@ export const createPost = async (req, res) => {
             publishdate ,
             likefee,
             sharereward,
-            content,
+            content
           } = req.body;
         console.log("req.body after const",req.body)
 
@@ -92,11 +103,11 @@ export const createPost = async (req, res) => {
                 shareCount: 0,
                 deployTxid: mintResponse.data.mintResult.deploytxid,
                 currentTxid: mintResponse.data.mintResult.currenttxid,
-                fileHex: mintResponse.data.mintResult.filehex,
+                fileHex: "",
                 authorPubkey: mintResponse.data.mintResult.authorpubkey,
                 shareReward: sharereward,
                 likeReward: likefee,
-                content
+                title:generateRandomString(12),                content
             });
 
             await newPost.save(); // Save the post to MongoDB
@@ -166,3 +177,41 @@ export const getAllPosts = async (request, response) => {
         response.status(500).json(error)
     }
 }
+
+export const getImage = async (request, response) => {
+    console.log(request.params)
+    try {
+      
+      console.log(request.params.id)
+        const postId = await Post.findById(request.params.id);
+
+        // Check if postId is provided
+        if (!postId) {
+            return response.status(400).json({ error: 'postId is required' });
+        }
+
+        // Find the post by its ID
+        const post = await Post.findById(request.params.id);
+      
+
+        // Check if the post exists
+    
+        // Retrieve deployTxid and outputIndex from the post
+        const { deployTxid} = post;
+     console.log("deployTxid",deployTxid)
+        // Make an HTTP POST request to the '/data' route
+        const dataResponse = await axios.post('http://localhost:5000/custom/data', {
+            txid: deployTxid,
+            outputindex: 0
+        });
+
+        // Extract data from the response
+        const convertedData = dataResponse.data.data;
+
+        // Example response
+        
+        response.status(200).json(convertedData);
+    } catch (error) {
+        response.status(500).json({ error: error.message });
+    }
+};
