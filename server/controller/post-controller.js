@@ -26,18 +26,20 @@ function generateRandomString(length) {
 
 export const createPost = async (req, res) => {
     console.log("req.body",req.body)
-    console.log("req.body",req.file)
+    console.log("req.file",req.file)
+    console.log("req.userId",req.user_id)
+    console.log("auth token is",req.auth_token);
     try {
         console.log("create post called")
       const  {
-            authtoken,
+            
             category,
             subheading,
             heading,
             articalauthor,
             publishdate ,
-            likefee,
-            sharereward,
+            // likefee,
+            // sharereward,
             content
           } = req.body;
         console.log("req.body after const",req.body)
@@ -66,30 +68,30 @@ export const createPost = async (req, res) => {
         const filePath = path.join( "uploads", req.file.filename);
         const fileBuffer = fs.readFileSync(filePath);
 
-        // Create FormData object for multipart/form-data
-        const formData = new FormData();
-        formData.append("file", fileBuffer, req.file.originalname);// Add uploaded file
-        formData.append('authtoken', authtoken);
-        formData.append('sharereward', sharereward);
-        formData.append('likefee', likefee);
-        formData.append('publishdate', publishdate);
-        formData.append('heading', heading);
-        formData.append('subheading', subheading);
-        formData.append('category', category);
-        formData.append('articalauthor', articalauthor);
-        formData.append('content', content);
-        console.log("req.body after filling formdaat",req.body)
-        // Make the POST request to mint the token
-        const mintResponse = await axios.post('http://localhost:5000/custom/mint', formData, {
-            headers: {
-                ...formData.getHeaders(),
-            }
-        });
+        // // Create FormData object for multipart/form-data
+        // const formData = new FormData();
+        // formData.append("file", fileBuffer, req.file.originalname);// Add uploaded file
+        // // formData.append('authtoken', authtoken);
+        // formData.append('sharereward', sharereward);
+        // formData.append('likefee', likefee);
+        // formData.append('publishdate', publishdate);
+        // formData.append('heading', heading);
+        // formData.append('subheading', subheading);
+        // formData.append('category', category);
+        // formData.append('articalauthor', articalauthor);
+        // formData.append('content', content);
+        // console.log("req.body after filling formdaat",req.body)
+        // // Make the POST request to mint the token
+        // const mintResponse = await axios.post('http://localhost:5000/custom/mint', formData, {
+        //     headers: {
+        //         ...formData.getHeaders(),
+        //     }
+        // });
 
-        console.log('Minting response:', mintResponse.data);
+        // console.log('Minting response:', mintResponse.data);
 
         // Handle the response
-        if (mintResponse.data.success) {
+        // if (mintResponse.data.success) {
             // Save the post to MongoDB
             const newPost = new Post({
                 heading,
@@ -99,23 +101,23 @@ export const createPost = async (req, res) => {
                 username: articalauthor,
                 categories: category,
                 publishDate: publishdate,
-                likeCount: 0,
-                shareCount: 0,
-                deployTxid: mintResponse.data.mintResult.deploytxid,
-                currentTxid: mintResponse.data.mintResult.currenttxid,
+                // likeCount: 0,
+                // shareCount: 0,
+                // deployTxid: mintResponse.data.mintResult.deploytxid,
+                // currentTxid: mintResponse.data.mintResult.currenttxid,
                 fileHex: "",
-                authorPubkey: mintResponse.data.mintResult.authorpubkey,
-                shareReward: sharereward,
-                likeReward: likefee,
+                // authorPubkey: mintResponse.data.mintResult.authorpubkey,
+                // shareReward: sharereward,
+                // likeReward: likefee,
                 title:generateRandomString(12),                content
             });
 
             await newPost.save(); // Save the post to MongoDB
 
             res.status(200).json({ message: 'Post saved successfully', post: newPost });
-        } else {
-            res.status(500).json({ error: 'Error minting token', details: mintResponse.data.error });
-        }
+        // } else {
+        //     res.status(500).json({ error: 'Error minting token', details: mintResponse.data.error });
+        // }
     } catch (error) {
         console.error('Error creating post:', error);
         res.status(500).json({ error: 'Internal Server Error', details: error.message });

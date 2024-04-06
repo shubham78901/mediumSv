@@ -8,72 +8,79 @@ import User from '../model/user.js';
 dotenv.config();
 
 export const singupUser = async (request, response) => {
-    try {
+  try {
       const { username, email, password } = request.body;
-      const user = { username, email, password };
-  
+
       // Validate input data
       if (!username || !email || !password) {
-        return response.status(400).json({ msg: 'Please provide username, email, and password' });
+          return response.status(400).json({ msg: 'Please provide username, email, and password' });
       }
-  
+
+      // Check if username is already in use
+      const existingUser = await User.findOne({ username });
+      if (existingUser) {
+          return response.status(409).json({ msg: 'Username is already in use' });
+      }
+
+      // Proceed with signup if username is not in use
       const axiosResponse = await axios.post(
-        'https://dev.neucron.io/v1/auth/signup',
-        { email: email, password: user.password },
-        { headers: { 'Content-Type': 'application/json' } }
+          'https://dev.neucron.io/v1/auth/signup',
+          { email, password },
+          { headers: { 'Content-Type': 'application/json' } }
       );
-  
+
       console.log('signup');
-  
+
       if (axiosResponse.status === 200) {
-        const userData = axiosResponse.data.data;
-        const newUser = new User({
-          email,
-          username,
-          password,
-          user_id: userData.user_id,
-          wallet_id: userData.wallet_id,
-          wallet_address: userData.wallet_address,
-          pub_key: userData.pub_key,
-          paymail_id: userData.paymail_id
-        });
-  
-        // Save the user to the database
-        const savedUser = await newUser.save();
-  
-        // Extract user data from the response
-        return response.status(200).json({ msg: 'Signup successful', data: userData });
+          const userData = axiosResponse.data.data;
+          const newUser = new User({
+              email,
+              username,
+              password,
+              user_id: userData.user_id,
+              wallet_id: userData.wallet_id,
+              wallet_address: userData.wallet_address,
+              pub_key: userData.pub_key,
+              paymail_id: userData.paymail_id,
+              auth_token: userData.access_token
+          });
+
+          // Save the user to the database
+          const savedUser = await newUser.save();
+
+          // Extract user data from the response
+          return response.status(200).json({ msg: 'Signup successful', data: userData });
       } else if (axiosResponse.status === 409) {
-        // User already exists
-        const errorMessage = axiosResponse.data.message;
-        return response.status(409).json({ msg: errorMessage });
+          // User already exists
+          const errorMessage = axiosResponse.data.message;
+          return response.status(409).json({ msg: errorMessage });
       } else if (axiosResponse.status === 401) {
-        // Handle invalid credentials
-        const errorMessage = axiosResponse.data.message;
-        const errorDetail = axiosResponse.data.detail;
-        return response.status(401).json({ msg: errorMessage, detail: errorDetail });
+          // Handle invalid credentials
+          const errorMessage = axiosResponse.data.message;
+          const errorDetail = axiosResponse.data.detail;
+          return response.status(401).json({ msg: errorMessage, detail: errorDetail });
       } else {
-        // Handle other status codes
-        return response.status(axiosResponse.status).json({ msg: 'Error while signing up user' });
+          // Handle other status codes
+          return response.status(axiosResponse.status).json({ msg: 'Error while signing up user' });
       }
-    } catch (error) {
+  } catch (error) {
       console.error(error);
-  
+
       // Handle axios errors
       if (error.response) {
-        // The request was made and the server responded with a status code
-        return response.status(error.response.status).json({ msg: error.response.data.message });
+          // The request was made and the server responded with a status code
+          return response.status(error.response.status).json({ msg: error.response.data.message });
       } else if (error.request) {
-        // The request was made but no response was received
-        return response.status(500).json({ msg: 'No response received from the server' });
+          // The request was made but no response was received
+          return response.status(500).json({ msg: 'No response received from the server' });
       } else {
-        // Something happened in setting up the request that triggered an Error
-        return response.status(500).json({ msg: error.message });
+          // Something happened in setting up the request that triggered an Error
+          return response.status(500).json({ msg: error.message });
       }
-    }
-  };
+  }
+};
 
-  export const loginUser = async (request, response) => {
+export const loginUser = async (request, response) => {
     try {
       const { email, password } = request.body;
   
