@@ -25,74 +25,62 @@ function generateRandomString(length) {
 // Create multer instance
 
 export const createPost = async (req, res) => {
-    console.log("req.body",req.body)
-    console.log("req.file",req.file)
-    console.log("req.userId",req.user_id)
-    console.log("auth token is",req.auth_token);
     try {
-        console.log("create post called")
-      const  {
-            
+        console.log("req.body", req.body);
+        console.log("req.file", req.file);
+        console.log("req.userId", req.user_id);
+        console.log("auth token is", req.auth_token);
+
+        const {
             category,
             subheading,
             heading,
             articalauthor,
-            publishdate ,
-            // likefee,
-            // sharereward,
+            publishdate,
+            likefee,
+            sharereward,
             content
-          } = req.body;
-        console.log("req.body after const",req.body)
+        } = req.body;
 
-        // console.log(req)
+        console.log("Received data:", {
+            category,
+            subheading,
+            heading,
+            articalauthor,
+            publishdate,
+            likefee,
+            sharereward,
+            content
+        });
 
-        // Log the received data for debugging
-        // console.log(authtoken,
-        //     sharereward,
-        //     likefee,
-        //     publishdate,
-        //     heading,
-        //     subheading,
-        //     category,
-        //     articalauthor,
-        //     content);
-
-        // Check if file was uploaded
         if (!req.file) {
             console.error('No file uploaded');
             return res.status(400).json({ success: false, error: 'No file uploaded' });
         }
 
-        // Create FormData object for multipart/form-data
-        console.log("req.body after filecheck",req.body)
-        const filePath = path.join( "uploads", req.file.filename);
+        const filePath = path.join("uploads", req.file.filename);
         const fileBuffer = fs.readFileSync(filePath);
 
-        // // Create FormData object for multipart/form-data
-        // const formData = new FormData();
-        // formData.append("file", fileBuffer, req.file.originalname);// Add uploaded file
-        // // formData.append('authtoken', authtoken);
-        // formData.append('sharereward', sharereward);
-        // formData.append('likefee', likefee);
-        // formData.append('publishdate', publishdate);
-        // formData.append('heading', heading);
-        // formData.append('subheading', subheading);
-        // formData.append('category', category);
-        // formData.append('articalauthor', articalauthor);
-        // formData.append('content', content);
-        // console.log("req.body after filling formdaat",req.body)
-        // // Make the POST request to mint the token
-        // const mintResponse = await axios.post('http://localhost:5000/custom/mint', formData, {
-        //     headers: {
-        //         ...formData.getHeaders(),
-        //     }
-        // });
+        const formData = new FormData();
+        formData.append("file", fileBuffer, req.file.originalname);
+        formData.append('sharereward', sharereward);
+        formData.append('likefee', likefee);
+        formData.append('publishdate', publishdate);
+        formData.append('heading', heading);
+        formData.append('subheading', subheading);
+        formData.append('category', category);
+        formData.append('articalauthor', articalauthor);
+        formData.append('content', content);
 
-        // console.log('Minting response:', mintResponse.data);
+        const mintResponse = await axios.post('http://localhost:5000/custom/mint', formData, {
+            headers: {
+                ...formData.getHeaders(),
+            }
+        });
 
-        // Handle the response
-        // if (mintResponse.data.success) {
-            // Save the post to MongoDB
+        console.log('Minting response:', mintResponse.data);
+
+        if (mintResponse.data.success) {
             const newPost = new Post({
                 heading,
                 subHeading: subheading,
@@ -101,29 +89,29 @@ export const createPost = async (req, res) => {
                 username: articalauthor,
                 categories: category,
                 publishDate: publishdate,
-                // likeCount: 0,
-                // shareCount: 0,
-                // deployTxid: mintResponse.data.mintResult.deploytxid,
-                // currentTxid: mintResponse.data.mintResult.currenttxid,
+                likeCount: 0,
+                shareCount: 0,
+                deployTxid: mintResponse.data.mintResult.deploytxid,
+                currentTxid: mintResponse.data.mintResult.currenttxid,
                 fileHex: "",
-                // authorPubkey: mintResponse.data.mintResult.authorpubkey,
-                // shareReward: sharereward,
-                // likeReward: likefee,
-                title:generateRandomString(12),                content
+                authorPubkey: mintResponse.data.mintResult.authorpubkey,
+                shareReward: sharereward,
+                likeReward: likefee,
+                title: generateRandomString(12),
+                content
             });
 
-            await newPost.save(); // Save the post to MongoDB
+            await newPost.save();
 
             res.status(200).json({ message: 'Post saved successfully', post: newPost });
-        // } else {
-        //     res.status(500).json({ error: 'Error minting token', details: mintResponse.data.error });
-        // }
+        } else {
+            res.status(500).json({ error: 'Error minting token', details: mintResponse.data.error });
+        }
     } catch (error) {
         console.error('Error creating post:', error);
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
-
 
 
 export const updatePost = async (request, response) => {

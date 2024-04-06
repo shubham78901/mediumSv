@@ -48,8 +48,8 @@ router.get('/file/:id', getImage);
 router.get('/like/:id', likePost);
 // router.delete('/comment/delete/:id', authenticateToken, deleteComment);
  
-router.post('/comment/new', authenticateToken, newComment);
-router.get('/comments/:id', authenticateToken, getComments);
-router.delete('/comment/delete/:id', authenticateToken, deleteComment);
+// router.post('/comment/new', authenticateToken, newComment);
+// router.get('/comments/:id', authenticateToken, getComments);
+// router.delete('/comment/delete/:id', authenticateToken, deleteComment);
 
 export default router;
