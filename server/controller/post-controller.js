@@ -28,6 +28,7 @@ export const createPost = async (req, res) => {
     console.log("req.body",req.body)
     console.log("req.file",req.file)
     console.log("req.userId",req.user_id)
+    console.log("auth token is",req.auth_token);
     try {
         console.log("create post called")
       const  {

@@ -8,7 +8,7 @@ dotenv.config();
 
 export const authenticateToken = (request, response, next) => {
     const authHeader = request.headers['authorization'];
-    
+    request.auth_token=authHeader;
 
     const parts = authHeader.split('.');
     if (parts == null) {
