@@ -1,0 +1,1 @@
+{"scryptBase":"artifacts","bindings":[{"symbol":"Shift10","path":"../node_modules/scrypt-ts-lib/artifacts/shift10.scrypt"},{"symbol":"Ordinal","path":"node_modules/scrypt-ord/src/contracts/ordinal.scrypt"}]}
