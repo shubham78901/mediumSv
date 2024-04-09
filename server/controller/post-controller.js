@@ -30,7 +30,7 @@ export const createPost = async (req, res) => {
         console.log("req.file", req.file);
         console.log("req.userId", req.user_id);
         console.log("auth token is", req.auth_token);
-
+  const auth_token=req.auth_token
         const {
             category,
             subheading,
@@ -71,6 +71,7 @@ export const createPost = async (req, res) => {
         formData.append('category', category);
         formData.append('articalauthor', articalauthor);
         formData.append('content', content);
+        formData.append('authtoken', auth_token);
 
         const mintResponse = await axios.post('http://localhost:5000/custom/mint', formData, {
             headers: {
