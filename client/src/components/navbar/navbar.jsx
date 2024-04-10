@@ -28,7 +28,6 @@ const {isUserAuthenticated, setIsUserAuthenticated} = React.useContext(AuthConte
           ) : (
             <>
               <NavItem label="Log in" href="/account" />
-              <NavItem label="Log out" href="/account" onClick={handleLogout} />
             </>
           )}
         </nav>

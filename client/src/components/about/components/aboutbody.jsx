@@ -44,11 +44,6 @@ const processData = [
     <>
       <section className="process-section">
         <h2 className="section-title">Our Process</h2>
-        <div className="process-images">
-          {processData.map((process, index) => (
-            <ProcessColumn key={index} {...process} />
-          ))}
-        </div>
         <div className="process-details">
           {processData.map((process, index) => (
             <ProcessColumn key={index} {...process} />
