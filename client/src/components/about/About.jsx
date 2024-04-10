@@ -1,198 +1,225 @@
-import { Box, styled, Typography, Link } from "@mui/material";
-import { GitHub, Instagram,linkedin, Email } from '@mui/icons-material';
-import featured from "../../assert/featured.jpg";
-import mem from "../../assert/mem.png";
+import * as React from "react";
+import Navbar from "../navbar/navbar";
+import Footer from "../footer/Footer";
+import AboutBody from "../about/components/aboutbody";
+import AboutUsBody2 from "../about/components//aboutbody2";
+import AboutUsBody3 from "../about/components/aboutbody3";
+import Solar from "../../assets/solar-system.svg.png"
+import CodingGuy from "../../assets/CodingGuy.svg"
+import About2 from "../../assets/About2.svg"
+import About3 from "../../assets/About3.svg"
+import About4 from "../../assets/About4.png"
 
-const Banner = styled("img")`
-  width: 100%;
-  height: 50vh;
-  background-position: left 0px bottom 0px;
-  background-size: cover;
-  opacity: 0.8;
-`;
-
-const Wrapper = styled(Box)`
-  display: flex;
-  gap: 20px;
-
-  padding: 20px 80px 40px 80px;
-  & > h3,
-  & > h5 {
-    margin-top: 50px;
-  }
-`;
-
-const Heading = styled(Box)`
-  display: flex;
-  position: absolute;
-  top: 28%;
-  left: 40%;
-  font-size: 3.5rem;
-  color: white;
-  font-weight: 700;
-`;
-
-const Subheading = styled(Box)`
-  display: flex;
-  font-size: 40px;
-  color: Black;
-  font-weight: 700;
-`;
-
-const Teamwrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  padding: 20px 80px 40px 80px;
-`;
-const Team = styled(Box)`
-  display: flex;
-  padding: 20px;
-  gap: 20px;
-`;
-const Member = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 400px;
-  border: 1px solid #e2e2e2;
-  padding: 5px 8px;
-  border-radius: 7px;
-  &:hover {
-    box-shadow: 5px 5px 15px 10px rgba(0, 0, 0, 0.1);
-  }
-`;
-const Pic = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e2e2e2;
-`;
-const Img = styled("img")`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 1px solid #e2e2e2;
-`;
-
-const Aboutmem = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  text-align: justify;
-  padding: 10px 15px;
-`;
-const Memname = styled(Box)`
-  display: flex;
-  padding-bottom: 10px;
-  font-size: 1.5rem;
-  color: #800000;
-`;
-
-const Text = styled(Typography,Box)`
-  color: #878787;
-  font-size: 1.4rem;
-  &:hover {
-    box-shadow: 5px 5px 15px 10px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-
-const About = () => {
-
-    return (
-        <Box>
-            <Banner/>
-            <Wrapper>
-                <Typography variant="h3">Code for Interview</Typography>
-                <Text variant="h5">I'm a Software Engineer based in India. 
-                    I've built websites, desktop applications and corporate software.<br />
-                    If you are interested, you can view some of my favorite projects here
-                    <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://github.com/shubham78901" color="inherit" target="_blank"><GitHub /></Link>
-                    </Box>
-                </Text>
-                <Text variant="h5">
-                    Need something built or simply want to have chat? Reach out to me on
-                    <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://www.linkedin.com/in/shubham-g-01b41a192/" color="inherit" target="_blank">
-                            <linkedin />
-                        </Link>
-                    </Box>  
-                        or send me an Email 
-                        <Link href="ss363757@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
-                            <Email />
-                        </Link>. 
-        </Text>
-      </Wrapper>
-
-      <Teamwrapper>
-        <Subheading
-          style={{
-            display: "flex",
-            width: "fit-content",
-            margin: "5px 0px 20px 0px",
-            borderBottom: "2px solid red",
-          }}
-        >
-          Our Team
-        </Subheading>
-        <Team>
-          <Member>
-            <Pic>
-              <Img src={mem} />
-            </Pic>
-            <Aboutmem>
-              <Memname>Ram ji</Memname>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-              nihil quaerat vitae in adipisci sunt neque omnis eveniet veritatis
-              unde nesciunt, necessitatibus provident animi aliquid vero
-              ratione? Asperiores cupiditate explicabo hic ut, recusandae eaque
-              at laborum similique ab, laudantium repellat.
-            </Aboutmem>
-          </Member>
-          <Member>
-            <Pic>
-              <Img src={mem} />
-            </Pic>
-            <Aboutmem>
-              <Memname>Ram ji</Memname>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-              nihil quaerat vitae in adipisci sunt neque omnis eveniet veritatis
-              unde nesciunt, necessitatibus provident animi aliquid vero
-              ratione? Asperiores cupiditate explicabo hic ut, recusandae eaque
-              at laborum similique ab, laudantium repellat.
-            </Aboutmem>
-          </Member>
-          <Member>
-            <Pic>
-              <Img src={mem} />
-            </Pic>
-            <Aboutmem>
-              <Memname>Ram ji</Memname>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-              nihil quaerat vitae in adipisci sunt neque omnis eveniet veritatis
-              unde nesciunt, necessitatibus provident animi aliquid vero
-              ratione? Asperiores cupiditate explicabo hic ut, recusandae eaque
-              at laborum similique ab, laudantium repellat.
-            </Aboutmem>
-          </Member>
-          <Member>
-            <Pic>
-              <Img src={mem} />
-            </Pic>
-            <Aboutmem>
-              <Memname>Ram ji</Memname>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-              nihil quaerat vitae in adipisci sunt neque omnis eveniet veritatis
-              unde nesciunt, necessitatibus provident animi aliquid vero
-              ratione? Asperiores cupiditate explicabo hic ut, recusandae eaque
-              at laborum similique ab, laudantium repellat.
-            </Aboutmem>
-          </Member>
-        </Team>
-      </Teamwrapper>
-    </Box>
+function TechNerdImage() {
+  return (
+    <div className="tech-nerd-image">
+      <img src={About2} alt="Tech nerd icon" className="icon" />
+      <div className="label flex flex-wrap">Tech nerds?</div>
+    </div>
   );
-};
+}
 
-export default About;
+function ContentCreatorImage() {
+  return (
+    <div className="content-creator-image">
+      <img src={About3} alt="Content creator icon" className="icon" />
+      <div className="label">Content creators?</div>
+    </div>
+  );
+}
+
+export default function AboutUs() {
+  return (
+    <>
+      <Navbar />
+      <section className="who-are-we">
+        <h2 className="title">Who are we?</h2>
+        <div className="content">
+          <div className="columns">
+            <div className="column tech-nerds">
+              <div className="content-wrapper">
+                <TechNerdImage />
+                <img src={Solar} alt="Tech nerds" className="image" />
+              </div>
+            </div>
+            <div className="column main-image">
+              <img src={CodingGuy} alt="Who are we" className="image" />
+            </div>
+            <div className="column content-creators">
+              <div className="content-wrapper">
+                <ContentCreatorImage />
+                <img src={About4} alt="Content creators" className="image" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <AboutBody/>
+      <AboutUsBody2/>
+      <AboutUsBody3/>
+      <Footer/>
+
+      <style jsx>{`
+        .who-are-we {
+          align-self: stretch;
+          display: flex;
+          flex-direction: column;
+          padding: 30px 0;
+          margin: 11vh;
+        }
+
+        .title {
+          color: #112e45;
+          text-align: center;
+          align-self: center;
+          font: 500 40px/120% Barlow, -apple-system, Roboto, Helvetica, sans-serif;
+          margin: 0;
+        }
+
+        .content {
+          margin-top: 16px;
+          width: 100%;
+          padding: 0 20px;
+        }
+
+        @media (max-width: 991px) {
+          .content {
+            max-width: 100%;
+          }
+        }
+
+        .columns {
+          display: flex;
+          gap: 20px;
+        }
+
+        @media (max-width: 991px) {
+          .columns {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+          }
+        }
+
+        .column {
+          display: flex;
+          flex-direction: column;
+          line-height: normal;
+        }
+
+        .tech-nerds,
+        .content-creators {
+          width: 27%;
+        }
+
+        @media (max-width: 991px) {
+          .tech-nerds,
+          .content-creators {
+            width: 100%;
+          }
+        }
+
+        .main-image {
+          width: 45%;
+          margin: 0 20px;
+        }
+
+        @media (max-width: 991px) {
+          .main-image {
+            width: 100%;
+            margin: 40px 0 0;
+          }
+        }
+
+        .content-wrapper {
+          border-color: rgba(231, 236, 247, 1);
+          border-style: solid;
+          background-color: #fafbfd;
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+          font-size: 18px;
+          color: #112e45;
+          font-weight: 500;
+          line-height: 156%;
+          width: 100%;
+          padding: 0 0 53px;
+        }
+
+        .tech-nerds .content-wrapper {
+          border-right-width: 2px;
+          text-align: right;
+          padding-right: 17px;
+        }
+
+        .content-creators .content-wrapper {
+          border-left-width: 2px;
+          padding-left: 18px;
+        }
+
+        @media (max-width: 991px) {
+          .content-wrapper {
+            margin-top: 28px;
+          }
+        }
+
+        .tech-nerd-image,
+        .content-creator-image {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .tech-nerd-image {
+          align-self: end;
+          width: 95px;
+        }
+
+        .icon {
+          width: 24px;
+          aspect-ratio: 1;
+          object-fit: contain;
+        }
+
+        .tech-nerd-image .icon {
+          align-self: end;
+        }
+
+        .label {
+          font-family: Barlow, sans-serif;
+          margin-top: 16px;
+        }
+
+        .image {
+          width: 100%;
+          margin-top: 16px;
+          object-fit: contain;
+        }
+
+        .tech-nerds .image,
+        .content-creators .image {
+          max-width: 384px;
+        }
+
+        .tech-nerds .image {
+          aspect-ratio: 0.9;
+        }
+
+        .main-image .image {
+          aspect-ratio: 1.39;
+          align-self: stretch;
+          margin: auto 0;
+        }
+
+        @media (max-width: 991px) {
+          .main-image .image {
+            max-width: 100%;
+          }
+        }
+
+        .content-creators .image {
+          aspect-ratio: 0.92;
+        }
+      `}</style>
+    </>
+  );
+}

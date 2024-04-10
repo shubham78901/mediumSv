@@ -51,11 +51,8 @@ export async function like(
     }
 
     let latestInstance: Article | undefined
-
     try {
         latestInstance = meInstance
-
-        latestInstance?.connect(provider)
     } catch (error) {
         console.error('Error fetching latest instance:', error)
         return '' // Return early or handle the error as needed
@@ -66,7 +63,7 @@ export async function like(
         return '' // Return early or handle the absence of latestInstance
     }
 
-    await latestInstance.connect(provider)
+    // await latestInstance.connect(provider)
 
     const meLikeInstance = latestInstance.next()
     meLikeInstance.likecount = meLikeInstance.likecount + BigInt(1)
