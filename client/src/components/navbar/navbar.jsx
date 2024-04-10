@@ -17,7 +17,7 @@ const {isUserAuthenticated, setIsUserAuthenticated} = React.useContext(AuthConte
   return (
     <header className="header">
       <div className="container">
-        <Link to="/" className="logo">MediumSV</Link>
+        <Link to="/" className="logo">mediumSv</Link>
         <nav className="nav">
           <NavItem label="About" href="/about" />
           <NavItem label="Contact" href="/contact" />
