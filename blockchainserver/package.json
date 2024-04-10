@@ -29,12 +29,14 @@
   },
   "dependencies": {
     "dotenv": "^16.0.3",
+    "express": "^4.19.2",
     "file-type": "^19.0.0",
+    "husky": "^9.0.11",
     "mime": "^1.6.0",
     "multer": "^1.4.5-lts.1",
     "neucron-signer": "^1.3.2",
     "scrypt-ord": "^1.0.17",
-    "scrypt-ts": "^1.3.30"
+    "scrypt-ts": "^1.3.31"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
@@ -50,7 +52,6 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^8.6.0",
-    "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "mocha": "^10.1.0",
     "prettier": "^2.8.2",
