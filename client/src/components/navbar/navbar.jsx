@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 import AuthContext from "../../context/AuthContext";
 const Navbar = () => {
@@ -24,7 +24,7 @@ const {isUserAuthenticated, setIsUserAuthenticated} = React.useContext(AuthConte
           <NavItem label="Create" href="/create" />
           
           {isUserAuthenticated ? (
-            <NavItem label="Logout" href="/" onClick={handleLogout} />
+            <NavItem label="Logout" href="/account" onClick={handleLogout} />
           ) : (
             <>
               <NavItem label="Log in" href="/account" />
