@@ -1,6 +1,6 @@
 
 import Footer from '../footer/Footer.jsx';
-import TrendingToday from "../postbody/postbody"
+import Posts from "../postbody/postbody"
 import Navbar from '../navbar/navbar';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
                     <Posts />
                 </Grid>
             </Grid> */}
-            <TrendingToday/>
+            <Posts/>
             <Footer/>
         </>
     )

@@ -12,6 +12,8 @@ import Update from './components/create/Update';
 import About from './components/about/About';
 import Contact from './components/contact/Contact';
 import Login from './components/account/Login';
+import BlogList from './components/postbody/postbody';
+import BlogDetails from './components/postbody/BlogDetails';
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
   const token = sessionStorage.getItem('accessToken');
   return isAuthenticated || token ? 
@@ -35,6 +37,8 @@ function App() {
             <Route path='/' >
               <Route path='/' element={<Home />} />
             </Route>
+            <Route path="/" element={<BlogList />} />
+        <Route path="/posts/:id" element={<BlogDetails />} />
 
             <Route path='/create' >
               <Route path='/create' element={<CreatePost />} />
