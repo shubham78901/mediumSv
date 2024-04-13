@@ -16,28 +16,24 @@ export const likePost = async (request, response) => {
             return response.status(404).json({ error: 'Post not found' });
         }
 
-        // Increase the likeCount by one
-      
-
-        // Update the post in MongoDB
+        // Make a POST request to the like API endpoint
         const likeResponse = await axios.post('http://localhost:5000/custom/like', {
             txid: post.currentTxid,
             outputindex: 0 ,
             authToken:authToken// Assuming you have an outputIndex property in your Post model
         });
 
-        console.log('Like API response:', likeResponse);
-        if(likeResponse.data.success==true){
+        // Check if the like API call was successful
+        if (likeResponse.data.success) {
+            // Update the post likeCount and currentTxid
             post.likeCount += 1;
+            post.currentTxid = likeResponse.data.result;
+            await post.save(); // Save the updated post
+            response.status(200).json({ message: 'Post liked successfully', updatedpost: post });
+        } else {
+            // Handle case where like API call was not successful
+            response.status(500).json({ error: 'Error liking post', details: likeResponse.data.error });
         }
-    //    await Post.findByIdAndUpdate(postId, { likeCount: post.likeCount, currentTxid: likeResponse.data.result });
-
-        await Post.findByIdAndUpdate(postId, { likeCount: post.likeCount,currentTxid:likeResponse.data.result });
-
-        // Make a POST request to the like API endpoint
-        let updatedpost = await Post.findById(postId);
-
-        response.status(200).json({ message: 'Post liked successfully', updatedpost });
     } catch (error) {
         console.error('Error liking post:', error);
         response.status(500).json({ error: 'Internal Server Error', details: error.message });

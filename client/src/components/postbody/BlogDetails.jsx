@@ -5,6 +5,8 @@ import { Box, Typography, Paper, Divider, Avatar, IconButton, Grid, Button } fro
 import { FaCalendarAlt, FaShareAlt, FaThumbsUp } from 'react-icons/fa';
 import Navbar from '../navbar/navbar';
 import Footer from '../footer/Footer';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -12,7 +14,37 @@ const BlogDetails = () => {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [imageData, setImageData] = useState('');
+  const [likeTransactionId, setLikeTransactionId] = useState('');
 
+  const handleLike = async () => {
+    if (!isLiked) {
+      setLikes((prevLikes) => prevLikes + 1);
+      setIsLiked(true);
+
+      try {
+        const likeResponse = await axios.put(`http://localhost:8000/update/${id}`);
+        console.log('Like API response:', likeResponse);
+
+        if (likeResponse.data.success) {
+          toast.success(`Post liked successfully! Transaction ID: ${likeResponse.data.likeTransactionId}`, {
+            duration: 5000,
+          });
+          setLikeTransactionId(likeResponse.data.result);
+        } else {
+          toast.error('Error liking post', {
+            duration: 5000,
+          });
+        }
+      } catch (error) {
+        console.error('Error liking post:', error);
+        setLikes((prevLikes) => prevLikes - 1);
+        setIsLiked(false);
+        toast.error('Failed to like post', {
+          duration: 5000,
+        });
+      }
+    }
+  };
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
@@ -63,22 +95,6 @@ const BlogDetails = () => {
     fetchImage();
   }, [id]);
 
-  const handleLike = async () => {
-    if (!isLiked) {
-      setLikes((prevLikes) => prevLikes + 1);
-      setIsLiked(true);
-
-      try {
-        const likeResponse = await axios.put(`http://localhost:8000/update/${id}`);
-        console.log('Like API response:', likeResponse);
-      } catch (error) {
-        console.error('Error liking post:', error);
-        setLikes((prevLikes) => prevLikes - 1);
-        setIsLiked(false);
-      }
-    }
-  };
-
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -97,6 +113,7 @@ const BlogDetails = () => {
     <div>
       <Navbar />
       <div className="blog-details-container">
+      <Toaster />
         <Grid container spacing={4}>
           <Grid item xs={12} md={8}>
             <Paper elevation={3} className="blog-details-paper">
@@ -163,7 +180,6 @@ const BlogDetails = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
-            {/* Add any additional sidebar content here */}
           </Grid>
         </Grid>
       </div>
