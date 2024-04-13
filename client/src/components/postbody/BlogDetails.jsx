@@ -16,15 +16,23 @@ const BlogDetails = () => {
   const [imageData, setImageData] = useState('');
   const [likeTransactionId, setLikeTransactionId] = useState('');
 
+  const authToken = sessionStorage.getItem('accessToken');
+
   const handleLike = async () => {
     if (!isLiked) {
       setLikes((prevLikes) => prevLikes + 1);
       setIsLiked(true);
-
+  
       try {
-        const likeResponse = await axios.put(`http://localhost:8000/update/${id}`);
+        const likeResponse = await axios.put(`http://localhost:8000/update/${id}`, null, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            authorization: authToken,
+          },
+        });
+  
         console.log('Like API response:', likeResponse);
-
+  
         if (likeResponse.data.success) {
           toast.success(`Post liked successfully! Transaction ID: ${likeResponse.data.likeTransactionId}`, {
             duration: 5000,
@@ -45,6 +53,7 @@ const BlogDetails = () => {
       }
     }
   };
+  
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
@@ -55,32 +64,33 @@ const BlogDetails = () => {
         console.error('Error fetching blog post:', error);
       }
     };
-
+  
     const fetchLikes = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/like/${id}`);
+        const response = await axios.get(`http://localhost:8000/like/${id}`, {
+          headers: {
+            authorization: authToken,
+          },
+        });
         setLikes(response.data.updatedpost.likeCount);
       } catch (error) {
         console.error('Error fetching likes:', error);
       }
     };
-
+  
     const fetchImage = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/file/${id}`);
         const hex = response.data.result;
-
         if (hex.length % 2) {
           console.log('Hex string length is odd.');
           return;
         }
-
         const binary = [];
         for (let i = 0; i < hex.length / 2; i++) {
           const h = hex.substr(i * 2, 2);
           binary[i] = parseInt(h, 16);
         }
-
         const byteArray = new Uint8Array(binary);
         const imageBlob = new Blob([byteArray], { type: 'application/octet-stream' });
         const imageUrl = URL.createObjectURL(imageBlob);
@@ -89,12 +99,11 @@ const BlogDetails = () => {
         console.error('Error fetching image:', error);
       }
     };
-
+  
     fetchBlogPost();
     fetchLikes();
     fetchImage();
   }, [id]);
-
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
