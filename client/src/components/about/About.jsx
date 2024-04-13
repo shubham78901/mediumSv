@@ -65,7 +65,7 @@ export default function AboutUs() {
           display: flex;
           flex-direction: column;
           padding: 30px 0;
-          margin: 11vh;
+          margin: 12vh;
         }
 
         .title {

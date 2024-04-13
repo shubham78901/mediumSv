@@ -196,33 +196,23 @@ const CreatePost = () => {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="likefee" className="form-label">
-              Like Fee
-            </label>
-            <input
-              type="text"
-              id="likefee"
-              name="likefee"
-              value={postData.likefee}
-              onChange={handleInputChange}
-              className="form-input"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="sharereward" className="form-label">
-              Share Reward
-            </label>
-            <input
-              type="text"
-              id="sharereward"
-              name="sharereward"
-              value={postData.sharereward}
-              onChange={handleInputChange}
-              className="form-input"
-              required
-            />
-          </div>
+      <div className="logo-container">
+        <img src="https://play-lh.googleusercontent.com/aMb_Qiolzkq8OxtQZ3Af2j8Zsp-ZZcNetR9O4xSjxH94gMA5c5gpRVbpg-3f_0L7vlo=w240-h480-rw" alt="Logo" className="logo" height={60} />
+      </div>
+      <label htmlFor="buymeacoffee" className="form-label">
+        Buy me a coffee
+      </label>
+      <input
+        type="text"
+        id="buymeacoffee"
+        name="likefee"
+        value={postData.likefee}
+        onChange={handleInputChange}
+        className="form-input"
+        required
+      />
+    </div>
+
           <button type="submit" className="submit-button">
             <FaPaperPlane />
             Create Post

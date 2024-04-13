@@ -36,6 +36,8 @@ export default function MyComponent() {
           display: flex;
           flex-direction: column;
           padding: 24px 16px;
+          margin: 12vh;
+
         }
         .team-heading {
           color: #112e45;
