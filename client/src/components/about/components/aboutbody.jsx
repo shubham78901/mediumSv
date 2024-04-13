@@ -62,7 +62,7 @@ const processData = [
           flex-direction: column;
           padding: 24px 16px;
           margin: 12vh;
-
+          
         }
 
         .section-title {
