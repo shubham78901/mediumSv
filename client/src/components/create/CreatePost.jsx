@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FaImage, FaCalendarAlt, FaPaperPlane } from 'react-icons/fa';
 import Footer from '../footer/Footer';
 import Navbar from '../navbar/navbar';
+import toast, { Toaster } from 'react-hot-toast';
+
 const CreatePost = () => {
   const [postData, setPostData] = useState({
     category: '',
@@ -40,9 +42,9 @@ const CreatePost = () => {
     if (!authToken) {
       console.error('Authentication token is missing');
       return;
-    }
-    else
+    } else {
       console.log(authToken);
+    }
   
     const formData = new FormData();
     formData.append('category', postData.category);
@@ -51,7 +53,7 @@ const CreatePost = () => {
     formData.append('articalauthor', postData.articalauthor);
     formData.append('publishdate', postData.publishdate);
     formData.append('likefee', postData.likefee);
-    formData.append('sharereward', postData.sharereward); 
+    formData.append('sharereward', postData.sharereward);
     formData.append('content', postData.content);
     formData.append('file', postData.file);
   
@@ -59,10 +61,20 @@ const CreatePost = () => {
       const response = await axios.post('http://localhost:8000/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          authorization: authToken, // Include the token in the Authorization header
+          authorization: authToken,
         },
       });
+  
       console.log(response.data);
+  
+      // Fetch the transaction ID from the /post/:id endpoint
+      const postResponse = await axios.get(`http://localhost:8000/post/${response.data.id}`);
+      const transactionId = postResponse.data.deployTxid;
+  
+      toast.success(`Post created successfully! Transaction ID: ${transactionId}`, {
+        duration: 5000,
+      });
+  
       // Reset form data
       setPostData({
         category: '',
@@ -75,15 +87,18 @@ const CreatePost = () => {
         content: '',
         file: null,
       });
+      console.log(postResponse.data.deployTxid);
     } catch (error) {
       console.error('Error creating post:', error);
+      toast.error('Failed to create post', {
+        duration: 5000,
+      });
     }
-  };
-  
-  return (
+  };  return (
     <div>
       <Navbar/>
     <div className="create-post-container">
+    <Toaster />
       <div className="create-post-card">
         <h2 className="create-post-title">Create a New Post</h2>
         <form onSubmit={handleSubmit} className="create-post-form">
