@@ -36,6 +36,7 @@ function AboutBody() {
           flex-direction: column;
           font-weight: 500;
           padding: 24px 16px;
+          margin: 12vh;
         }
 
         .title {
