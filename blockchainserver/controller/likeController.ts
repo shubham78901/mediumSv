@@ -6,7 +6,7 @@ const router = express.Router()
 router.post('/like', async function (req: Request, res: Response) {
     console.log('Handling like request...')
 
-    const { txid, outputindex } = req.body
+    const { txid, outputindex,authToken } = req.body
 
     try {
         console.log('Received request for data:', txid, outputindex)
@@ -14,7 +14,7 @@ router.post('/like', async function (req: Request, res: Response) {
         console.log('Data request')
 
         // Call the like function
-        const result = await like(txid, outputindex)
+        const result = await like(txid, outputindex,authToken)
 
         console.log(`Like successful. Transaction ID: ${result}`)
 

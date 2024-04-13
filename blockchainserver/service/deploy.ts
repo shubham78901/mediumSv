@@ -27,12 +27,13 @@ export async function Mint(
 
     await Article.loadArtifact('./artifacts/Article.json')
 
+  
     const nec_signer = await new NeucronSigner(
         new DefaultProvider({
             network: bsv.Networks.mainnet,
-        })
+        }),
+        authtoken
     )
-    await nec_signer.login('ss363757@gmail.com', 'Shubham123')
     const authorPubKey = await nec_signer.getDefaultPubKey()
 
     const instance = new Article(

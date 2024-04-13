@@ -9,6 +9,7 @@ export const likePost = async (request, response) => {
         // Find the post by ID
         const postId = request.params.id;
         const post = await Post.findById(postId);
+        const authToken=req.auth_token
 
         // Check if the post exists
         if (!post) {
@@ -18,7 +19,8 @@ export const likePost = async (request, response) => {
         // Make a POST request to the like API endpoint
         const likeResponse = await axios.post('http://localhost:5000/custom/like', {
             txid: post.currentTxid,
-            outputindex: 0 // Assuming you have an outputIndex property in your Post model
+            outputindex: 0 ,
+            authToken:authToken// Assuming you have an outputIndex property in your Post model
         });
 
         // Check if the like API call was successful

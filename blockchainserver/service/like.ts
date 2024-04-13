@@ -13,7 +13,8 @@ import { NeucronSigner } from 'neucron-signer'
 
 export async function like(
     txid: string,
-    outputindex: number
+    outputindex: number,
+    authToken:string
     // authtoken: string
 ): Promise<string> {
     await Article.loadArtifact('./artifacts/Article.json')
@@ -24,9 +25,9 @@ export async function like(
     const nec_signer = await new NeucronSigner(
         new DefaultProvider({
             network: bsv.Networks.mainnet,
-        })
+        }),
+        authToken
     )
-    await nec_signer.login('ss363757@gmail.com', 'Shubham123')
     await nec_signer.connect(provider)
     let tx: bsv.Transaction = await provider.getTransaction(txid)
 

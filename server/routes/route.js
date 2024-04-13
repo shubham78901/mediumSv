@@ -45,7 +45,7 @@ router.get('/posts',  getAllPosts);
 router.get('/file/:id', getImage);
 
 // router.post('/comment/new', authenticateToken, newComment);
-router.get('/like/:id', likePost);
+router.get('/like/:id',authenticateToken, likePost);
 // router.delete('/comment/delete/:id', authenticateToken, deleteComment);
  
 // router.post('/comment/new', authenticateToken, newComment);
