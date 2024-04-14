@@ -7,7 +7,9 @@ import Token from '../model/token.js';
 dotenv.config();
 
 export const authenticateToken = (request, response, next) => {
+
     const authHeader = request.headers['authorization'];
+    console.log(authHeader)
     request.auth_token=authHeader;
 
     const parts = authHeader.split('.');
