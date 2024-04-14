@@ -4,24 +4,18 @@ function AboutBody() {
   return (
     <section className="about-us">
       <h2 className="title">About us</h2>
-      <h3 className="subtitle">We are coders</h3>
+      <h3 className="subtitle">We are creaters</h3>
       <p className="description">
-        Welcome to Maharaja TentHouse, your premier partner in creating
-        unforgettable outdoor experiences. Our team of seasoned professionals is
-        dedicated to providing personalized service, meticulous attention to
-        detail, and creative solutions to exceed your expectations
+      Welcome to mediumSv, your gateway to an immersive journey through the ever-evolving landscape of technology and innovation. As avid explorers of the digital realm, we are passionate about uncovering the latest trends and developments in AI, blockchain, VR, and beyond. Through our engaging content and dynamic podcast, we invite you to embark on a captivating odyssey, where each episode unveils fresh insights, expert perspectives, and thought-provoking discussions. Whether you're a seasoned tech enthusiast or a curious newcomer, join us as we navigate the forefront of innovation and shape the future together.
       </p>
       <h3 className="subtitle">Our motive</h3>
       <p className="description">
-        We specialize in transforming ordinary spaces into extraordinary venues,
-        tailored to your unique vision and occasion.
+      our mission is to revolutionize the digital content landscape through blockchain technology. 
+        
         <br />
-        We understand the importance of every event, whether it's a dreamy
-        wedding, a corporate gala, or a lively celebration.
+        We're committed to empowering content creators by leveraging blockchain's decentralized ledger to facilitate secure microtransactions. Through our platform, creators can monetize their creativity directly, without intermediaries, while offering audiences the chance to support them seamlessly through microtransactions.
         <br />
-        With our extensive inventory of high-quality tents, furniture, lighting,
-        and decor, we have everything you need to bring your event to life, rain
-        or shine.
+        By harnessing the power of blockchain, we ensure transparent and tamper-proof transactions, providing creators with a fair and efficient way to earn from their content. Join us as we pioneer a new era of digital content monetization, where innovation thrives, and creators are truly empowered to succeed.
       </p>
 
       <style jsx>{`

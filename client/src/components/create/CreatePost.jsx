@@ -213,7 +213,7 @@ const CreatePost = () => {
           </div>
           <div className="form-group">
       <div className="logo-container">
-        <img src="https://play-lh.googleusercontent.com/aMb_Qiolzkq8OxtQZ3Af2j8Zsp-ZZcNetR9O4xSjxH94gMA5c5gpRVbpg-3f_0L7vlo=w240-h480-rw" alt="Logo" className="logo" height={60} />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKcO-EZnZOrZ7cEKzd79E1tPqNvfgfq6dyRw&s" alt="Logo" className="logo" height={60} />
       </div>
       <label htmlFor="buymeacoffee" className="form-label">
         Buy me a coffee
