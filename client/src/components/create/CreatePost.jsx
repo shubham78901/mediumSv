@@ -64,17 +64,17 @@ const CreatePost = () => {
           authorization: authToken,
         },
       });
-  
-      console.log(response.data);
-  
+    
+      console.log('Post creation response:', response.data); // Log the response data
+    
       // Fetch the transaction ID from the /post/:id endpoint
       const postResponse = await axios.get(`http://localhost:8000/post/${response.data.id}`);
       const transactionId = postResponse.data.deployTxid;
-  
+    
       toast.success(`Post created successfully! Transaction ID: ${transactionId}`, {
         duration: 5000,
       });
-  
+    
       // Reset form data
       setPostData({
         category: '',
@@ -87,13 +87,14 @@ const CreatePost = () => {
         content: '',
         file: null,
       });
-      console.log(postResponse.data.deployTxid);
+      console.log('Transaction ID:', transactionId); // Log the transaction ID
     } catch (error) {
       console.error('Error creating post:', error);
       toast.error('Failed to create post', {
         duration: 5000,
       });
     }
+    
   };  return (
     <div>
       <Navbar/>
@@ -212,7 +213,7 @@ const CreatePost = () => {
           </div>
           <div className="form-group">
       <div className="logo-container">
-        <img src="https://play-lh.googleusercontent.com/aMb_Qiolzkq8OxtQZ3Af2j8Zsp-ZZcNetR9O4xSjxH94gMA5c5gpRVbpg-3f_0L7vlo=w240-h480-rw" alt="Logo" className="logo" height={60} />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKcO-EZnZOrZ7cEKzd79E1tPqNvfgfq6dyRw&s" alt="Logo" className="logo" height={60} />
       </div>
       <label htmlFor="buymeacoffee" className="form-label">
         Buy me a coffee

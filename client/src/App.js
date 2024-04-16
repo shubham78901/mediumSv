@@ -40,9 +40,6 @@ function App() {
             <Route path="/" element={<BlogList />} />
         <Route path="/posts/:id" element={<BlogDetails />} />
 
-            <Route path='/create' >
-              <Route path='/create' element={<CreatePost />} />
-            </Route>
 
             <Route path='/details/:id' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
               <Route path='/details/:id' element={<DetailView />} />
@@ -59,8 +56,8 @@ function App() {
             <Route path='/contact' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
               <Route path='/contact' element={<Contact />} />
             </Route>
-            <Route path='/createpost' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
-              <Route path='/createpost' element={<create />} />
+            <Route path='/create' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
+              <Route path='/create' element={<CreatePost />} />
             </Route>
           </Routes>
         </Box>

@@ -12,6 +12,7 @@ const BlogList = () => {
   const [imagesData, setImagesData] = useState({});
   const [likesData, setLikesData] = useState({});
   const [isLiked, setIsLiked] = useState({});
+  const authToken = sessionStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
