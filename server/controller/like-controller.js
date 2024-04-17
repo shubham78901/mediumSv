@@ -9,7 +9,7 @@ export const likePost = async (request, response) => {
         // Find the post by ID
         const postId = request.params.id;
         const post = await Post.findById(postId);
-        const authToken=req.auth_token
+        const authToken=request.auth_token
         console.log(authToken)
 
         // Check if the post exists
