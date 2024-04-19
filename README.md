@@ -46,7 +46,7 @@ For testing purposes, use the following credentials:
 
 Email: ss363757@gmail.com
 Password: Shubham123
-Note
+Note:
 Ensure that MongoDB shell is running, as it stores side information and user data.
 
 Contributing
