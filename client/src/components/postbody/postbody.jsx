@@ -37,7 +37,7 @@ const BlogList = () => {
 
         const fetchLikesPromises = response.data.map(async (post) => {
           const likesResponse = await axios.get(`http://localhost:8000/like/${post._id}`);
-          return { id: post._id, likes: likesResponse.data.updatedpost.likeCount };
+          return { id: post._id, likes: likesResponse.data.likeCount };
         });
         const likes = await Promise.all(fetchLikesPromises);
         setLikesData(likes.reduce((acc, like) => ({ ...acc, [like.id]: like.likes }), {}));

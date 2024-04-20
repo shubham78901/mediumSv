@@ -7,7 +7,6 @@ import Navbar from '../navbar/navbar';
 import Footer from '../footer/Footer';
 import toast, { Toaster } from 'react-hot-toast';
 
-
 const BlogDetails = () => {
   const { id } = useParams();
   const [blogPost, setBlogPost] = useState(null);
@@ -18,66 +17,31 @@ const BlogDetails = () => {
 
   const authToken = sessionStorage.getItem('accessToken');
 
-  const handleLike = async () => {
-    if (!isLiked) {
-      setLikes((prevLikes) => prevLikes + 1);
-      setIsLiked(true);
-  
-      try {
-        const likeResponse = await axios.put(`http://localhost:8000/update/${id}`, null, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: authToken,
-          },
-        });
-  
-        console.log('Like API response:', likeResponse);
-  
-        if (likeResponse.data.success) {
-          toast.success(`Post liked successfully! Transaction ID: ${likeResponse.data.likeTransactionId}`, {
-            duration: 5000,
-          });
-          setLikeTransactionId(likeResponse.data.result);
-        } else {
-          toast.error('Error liking post', {
-            duration: 5000,
-          });
-        }
-      } catch (error) {
-        console.error('Error liking post:', error);
-        setLikes((prevLikes) => prevLikes - 1);
-        setIsLiked(false);
-        toast.error('Failed to like post', {
-          duration: 5000,
-        });
-      }
-    }
-  };
-  
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/post/${id}`);
         setBlogPost(response.data);
         setLikes(response.data.likes || 0);
+        setIsLiked(response.data.isLiked || false);
       } catch (error) {
         console.error('Error fetching blog post:', error);
       }
     };
-  
+
     const fetchLikes = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/like/${id}`, {
-          headers: {
-            authorization: authToken,
-          },
-        });
-        setLikes(response.data.updatedpost.likeCount);
+        const response = await axios.get(`http://localhost:8000/post/${id}`);
+        setLikes(response.data.likeCount || 0);
       } catch (error) {
         console.error('Error fetching likes:', error);
+        toast.error('Failed to fetch likes', {
+          duration: 5000,
+        });
+        setLikes(blogPost?.likes || 0); // Use the initial like count from the blog post
       }
     };
-  
+
     const fetchImage = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/file/${id}`);
@@ -99,11 +63,41 @@ const BlogDetails = () => {
         console.error('Error fetching image:', error);
       }
     };
-  
+
     fetchBlogPost();
     fetchLikes();
     fetchImage();
-  }, [id]);
+  }, [id, blogPost?.likes]);
+
+  const handleLike = async () => {
+    if (!isLiked) {
+      try {
+        const likeResponse = await axios.get(`http://localhost:8000/like/${id}`, null, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            authorization: authToken,
+          },
+        });
+  
+        if (likeResponse.data.success) {
+          setLikes(likeResponse.data.updatedpost.likeCount);
+          setIsLiked(true);
+          toast.success(`Post liked successfully! Transaction ID: ${likeResponse.data.likeTransactionId}`, {
+            duration: 5000,
+          });
+        } else {
+          toast.error('Error liking post', {
+            duration: 5000,
+          });
+        }
+      } catch (error) {
+        console.error('Error liking post:', error);
+        toast.error('Failed to like post', {
+          duration: 5000,
+        });
+      }
+    }
+  };
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -122,7 +116,7 @@ const BlogDetails = () => {
     <div>
       <Navbar />
       <div className="blog-details-container">
-      <Toaster />
+        <Toaster />
         <Grid container spacing={4}>
           <Grid item xs={12} md={8}>
             <Paper elevation={3} className="blog-details-paper">
@@ -189,6 +183,7 @@ const BlogDetails = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
+            {/* Optional sidebar or additional content */}
           </Grid>
         </Grid>
       </div>

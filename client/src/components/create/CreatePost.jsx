@@ -6,6 +6,7 @@ import Navbar from '../navbar/navbar';
 import toast, { Toaster } from 'react-hot-toast';
 
 const CreatePost = () => {
+  const[transactid, settransactid] = useState('');
   const [postData, setPostData] = useState({
     category: '',
     subheading: '',
@@ -37,13 +38,10 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     const authToken = sessionStorage.getItem('accessToken');
     if (!authToken) {
       console.error('Authentication token is missing');
       return;
-    } else {
-      console.log(authToken);
     }
   
     const formData = new FormData();
@@ -64,18 +62,22 @@ const CreatePost = () => {
           authorization: authToken,
         },
       });
-    
-      console.log('Post creation response:', response.data); // Log the response data
-    
-      // Fetch the transaction ID from the /post/:id endpoint
-      const postResponse = await axios.get(`http://localhost:8000/post/${response.data.id}`);
-      const transactionId = postResponse.data.deployTxid;
-    
-      toast.success(`Post created successfully! Transaction ID: ${transactionId}`, {
-        duration: 5000,
-      });
-    
-      // Reset form data
+  
+      console.log('Post creation response:', response.data);
+      const { message, post } = response.data;
+      if (message === 'Post saved successfully') {
+        console.log("Transaction ID:", post.deployTxid);
+        settransactid(post.deployTxid);
+        toast.success(`Post created successfully! Transaction ID: ${post.deployTxid}`, {
+          duration: 50000,
+        });
+      } else {
+        console.error('Failed to create post');
+        toast.error('Failed to create post', {
+          duration: 5000,
+        });
+      }
+  
       setPostData({
         category: '',
         subheading: '',
@@ -87,14 +89,12 @@ const CreatePost = () => {
         content: '',
         file: null,
       });
-      console.log('Transaction ID:', transactionId); // Log the transaction ID
     } catch (error) {
       console.error('Error creating post:', error);
       toast.error('Failed to create post', {
         duration: 5000,
       });
     }
-    
   };  return (
     <div>
       <Navbar/>
@@ -233,6 +233,9 @@ const CreatePost = () => {
             <FaPaperPlane />
             Create Post
           </button>
+          <div>
+            Transaction id:- <span className="transactid">{transactid}</span>
+          </div>
         </form>
       </div>
       <style jsx>{`
