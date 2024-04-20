@@ -38,6 +38,7 @@ export const likePost = async (request, response) => {
             // Update the post likeCount and currentTxid
             post.likeCount += 1;
             post.currentTxid = likeResponse.data.result;
+            console.log(" likeResponse.data.result", likeResponse.data.result)
             await post.save(); // Save the updated post
             response.status(200).json({ message: 'Post liked successfully', updatedpost: post });
         } else {
