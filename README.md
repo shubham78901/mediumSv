@@ -22,7 +22,8 @@ To start the blockchain:
 bash
 Copy code
 cd blockchainserver
-npm i 
+npm i
+npm run compile
 npx ts-node server.ts
 To start the backend server:
 
