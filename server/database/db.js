@@ -8,7 +8,7 @@ const Connection = async () => {
     
     // Construct MongoDB connection URL with hardcoded credentials
     // const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB_NAME}?authSource=admin`;
-    const MONGO_URL='mongodb+srv://Shubham:Shubham123@clusterblogs.dsf7wsh.mongodb.net/blog?retryWrites=true&w=majority&appName=ClusterBlog';
+    const MONGO_URL='mongodb://localhost:27017';
     try {
         // Connect to MongoDB using the constructed URL
         await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });

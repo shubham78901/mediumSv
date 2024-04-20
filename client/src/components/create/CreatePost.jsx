@@ -231,7 +231,7 @@ const CreatePost = () => {
 
           <button type="submit" className="submit-button">
             <FaPaperPlane />
-            Create Post
+           Publish!
           </button>
           <div>
             Transaction id:- <span className="transactid">{transactid}</span>

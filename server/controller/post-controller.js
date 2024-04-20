@@ -168,28 +168,35 @@ export const getAllPosts = async (request, response) => {
         response.status(500).json(error)
     }
 }
-
 export const getImage = async (request, response) => {
-    console.log(request.params)
     try {
-      
-      console.log(request.params.id)
-        const postId = await Post.findById(request.params.id);
+        // Retrieve the post ID from the request parameters
+        const postId = request.params.id;
 
         // Check if postId is provided
         if (!postId) {
             return response.status(400).json({ error: 'postId is required' });
         }
 
+        // Attempt to convert the postId to a valid ObjectId
+        const isValidObjectId = mongoose.Types.ObjectId.isValid(postId);
+
+        // If the postId is not a valid ObjectId, return an error
+        if (!isValidObjectId) {
+            return response.status(400).json({ error: 'Invalid postId' });
+        }
+
         // Find the post by its ID
-        const post = await Post.findById(request.params.id);
-      
+        const post = await Post.findById(postId);
 
         // Check if the post exists
-    
-        // Retrieve deployTxid and outputIndex from the post
-        const { deployTxid} = post;
-     console.log("deployTxid",deployTxid)
+        if (!post) {
+            return response.status(404).json({ error: 'Post not found' });
+        }
+
+        // Retrieve deployTxid from the post
+        const { deployTxid } = post;
+
         // Make an HTTP POST request to the '/data' route
         const dataResponse = await axios.post('http://localhost:5000/custom/sendfile', {
             txid: deployTxid,
@@ -197,12 +204,13 @@ export const getImage = async (request, response) => {
         });
 
         // Extract data from the response
-        const convertedData = dataResponse.data.data;
+        const imageData = dataResponse.data;
 
-        // Example response
-        
-        response.status(200).json(dataResponse.data);
+        // Return the image data
+        response.status(200).json(imageData);
     } catch (error) {
-        response.status(500).json({ error: error.message });
+        // Handle any errors
+        console.error('Error fetching image:', error);
+        response.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };

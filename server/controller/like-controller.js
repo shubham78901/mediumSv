@@ -1,5 +1,6 @@
 
 import Comment from '../model/comment.js';
+import mongoose from 'mongoose';
 
 import Post from '../model/post.js';
 import axios from 'axios';
@@ -7,21 +8,29 @@ import axios from 'axios';
 export const likePost = async (request, response) => {
     try {
         // Find the post by ID
-        const postId = request.params.id;
-        const post = await Post.findById(postId);
-        const authToken=req.auth_token
-        console.log(authToken)
+  const postId = request.params.id.trim();
 
+        
+        // Check if postId is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(postId)) {
+            return response.status(400).json({ error: 'Invalid post ID' });
+        }
+        
+        const post = await Post.findById(postId);
+        
         // Check if the post exists
         if (!post) {
             return response.status(404).json({ error: 'Post not found' });
         }
+        
+        const authToken = request.auth_token;
+        console.log(authToken);
 
         // Make a POST request to the like API endpoint
         const likeResponse = await axios.post('http://localhost:5000/custom/like', {
             txid: post.currentTxid,
-            outputindex: 0 ,
-            authToken:authToken// Assuming you have an outputIndex property in your Post model
+            outputindex: 0,
+            authToken: authToken
         });
 
         // Check if the like API call was successful
@@ -36,10 +45,12 @@ export const likePost = async (request, response) => {
             response.status(500).json({ error: 'Error liking post', details: likeResponse.data.error });
         }
     } catch (error) {
+        // Handle any errors
         console.error('Error liking post:', error);
         response.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
+
 
 export const getComments = async (request, response) => {
     try {
