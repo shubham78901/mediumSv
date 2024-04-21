@@ -1,11 +1,11 @@
 import * as React from "react";
-import { FaTwitter, FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
+import {FaMailBulk, FaLinkedin, FaFacebook, FaGithub, FaYoutube } from "react-icons/fa";
 
 const socialMediaLinks = [
-  { Icon: FaTwitter, alt: "Twitter", link: "https://twitter.com/example" },
-  { Icon: FaFacebook, alt: "Facebook", link: "https://facebook.com/example" },
+  { Icon: FaMailBulk, alt: "Gmail", link: "ss363757@gmail.com" },
+  { Icon: FaGithub, alt: "Github", link: "https://github.com/shubham78901" },
   { Icon: FaLinkedin, alt: "Instagram", link: "https://www.linkedin.com/in/shubham-g-01b41a192/" },
-  { Icon: FaYoutube, alt: "LinkedIn", link: "https://youtube.com/example" }
+  { Icon: FaYoutube, alt: "LinkedIn", link: "http://www.linkedin.com/in/shubham-g-01b41a192" }
 ];
 
 const NavLink = ({ children }) => (
