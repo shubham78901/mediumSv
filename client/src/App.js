@@ -49,11 +49,11 @@ function App() {
               <Route path='/update/:id' element={<Update />} />
             </Route>
 
-            <Route path='/about' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
+            <Route path='/about' >
               <Route path='/about' element={<About />} />
             </Route>
 
-            <Route path='/contact' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
+            <Route path='/contact'>
               <Route path='/contact' element={<Contact />} />
             </Route>
             <Route path='/create' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
