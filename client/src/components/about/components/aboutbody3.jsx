@@ -1,26 +1,16 @@
 import * as React from "react";
 import { useState } from "react";
-import About from "../../../assets/About.png"
+import About from "../../../assets/photo.jpg"
 export default function MyComponent() {
   const [teamMembers, setTeamMembers] = useState([
     {
-      name: "Nikhil Matta",
+      name: "Shubham Gautam",
       role: "Software Developer",
       image: About,
     },
     {
       name: "Nikhil Matta",
       role: "Software Developer", 
-      image: About,
-    },
-    {
-      name: "Nikhil Matta",
-      role: "Software Developer",
-      image: About,
-    },
-    {
-      name: "Nikhil Matta", 
-      role: "Software Developer",
       image: About,
     },
   ]);
@@ -99,8 +89,12 @@ export default function MyComponent() {
           width: 100%;
           object-fit: cover;
           object-position: center;
+          /* Add the following properties */
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
-        .member-details {
+                .member-details {
           position: relative;
           justify-content: flex-end;
           background-color: rgba(0, 0, 0, 0.5);

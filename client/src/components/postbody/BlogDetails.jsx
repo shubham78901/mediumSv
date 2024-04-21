@@ -32,7 +32,7 @@ const BlogDetails = () => {
     const fetchLikes = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/post/${id}`);
-        setLikes(response.data.likeCount || 0);
+        setLikes(response.data.likes || 0);
       } catch (error) {
         console.error('Error fetching likes:', error);
         toast.error('Failed to fetch likes', {
@@ -70,34 +70,44 @@ const BlogDetails = () => {
   }, [id, blogPost?.likes]);
 
   const handleLike = async () => {
-    if (!isLiked) {
-      try {
-        const likeResponse = await axios.get(`http://localhost:8000/like/${id}`, null, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: authToken,
-          },
-        });
+    try {
+      const authToken = sessionStorage.getItem('accessToken');
+      if (!authToken) {
+        // Handle case where authToken is not available
+        console.error('Auth token not found in sessionStorage.');
+        return;
+      }
   
-        if (likeResponse.data.success) {
-          setLikes(likeResponse.data.updatedpost.likeCount);
-          setIsLiked(true);
-          toast.success(`Post liked successfully! Transaction ID: ${likeResponse.data.likeTransactionId}`, {
-            duration: 5000,
-          });
-        } else {
-          toast.error('Error liking post', {
-            duration: 5000,
-          });
-        }
-      } catch (error) {
-        console.error('Error liking post:', error);
-        toast.error('Failed to like post', {
+      const response = await axios.get(`http://localhost:8000/like/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+  
+      // Assuming your API returns a success message upon successful like
+      if (response.data.message === 'Post liked successfully') {
+        // Update the UI or perform any necessary actions after liking the post
+        // For example, update the like count or show a success message
+        toast.success('Post liked successfully!', {
+          duration: 5000,
+        });
+        // Update the like count and isLiked state
+        setLikes((prevLikes) => prevLikes + 1);
+        setIsLiked(true);
+      } else {
+        toast.error('Failed to like post. Please try again later.', {
           duration: 5000,
         });
       }
+    } catch (error) {
+      console.error('Error liking post:', error);
+      toast.error('Failed to like post. Please try again later.', {
+        duration: 5000,
+      });
     }
   };
+  
+  
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import Post from '../model/post.js'; // Import the Post model
 import multer from 'multer';
-
+import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path'; 
 
