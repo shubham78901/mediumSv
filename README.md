@@ -50,6 +50,89 @@ Password: Shubham123
 Note:
 Ensure that MongoDB shell is running, as it stores side information and user data.
 
+
+
+
+
+
+
+
+
+
+
+
+impt blockchain endpoint:
+API Endpoints
+1. Minting Articles
+Endpoint: POST /custom/mint
+
+Description
+Minting articles endpoint is used to publish articles on the blockchain through a smart contract.
+
+Request
+Method: POST
+Content-Type: application/json
+Body Parameters:
+Provide article data in the request body.
+Response
+Status Code: 200 OK on success.
+Response Body:
+JSON object confirming successful minting of the article.
+2. Sending Files
+Endpoint: POST /custom/sendfile
+
+Description
+Sending files endpoint is used to upload files to the blockchain.
+
+Request
+Method: POST
+Content-Type: multipart/form-data
+Body Parameters:
+File to be uploaded.
+Response
+Status Code: 200 OK on success.
+Response Body:
+JSON object confirming successful file upload.
+3. Getting Data
+Endpoint: GET /custom/data
+
+Description
+Getting data endpoint is used to retrieve data from the blockchain.
+
+Request
+Method: GET
+Response
+Status Code: 200 OK on success.
+Response Body:
+JSON object containing requested data.
+4. Liking Content
+Endpoint: POST /custom/like
+
+Description
+Liking content endpoint is used to donate money to the author of the content.
+
+Request
+Method: POST
+Content-Type: application/json
+Body Parameters:
+Provide necessary data for liking the content in the request body.
+Response
+Status Code: 200 OK on success.
+Response Body:
+JSON object confirming successful liking of the content.
+5. Health Check
+Endpoint: GET /health
+
+Description
+Health check endpoint is used to verify the status of the server.
+
+Request
+Method: GET
+Response
+Status Code: 200 OK if the server is running.
+Response Body:
+JSON object with status information.
+
 Contributing
 Contributions are welcome! Feel free to open issues and pull requests to improve the project.
 
