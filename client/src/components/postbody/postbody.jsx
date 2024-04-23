@@ -69,7 +69,7 @@ const BlogList = () => {
         setImagesData(images.reduce((acc, image) => ({ ...acc, [image.id]: image.imageUrl }), {}));
 
         const fetchLikesPromises = response.data.map(async (post) => {
-          const likesResponse = await axios.get(`http://localhost:8000/like/${post._id}`);
+          const likesResponse = await axios.get(`http://localhost:8000/post/${post._id}`);
           return { id: post._id, likes: likesResponse.data.updatedpost.likeCount };
         });
         const likes = await Promise.all(fetchLikesPromises);

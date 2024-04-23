@@ -21,18 +21,20 @@ const BlogDetails = () => {
     const fetchBlogPost = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/post/${id}`);
-        setBlogPost(response.data);
-        setLikes(response.data.likes || 0);
-        setIsLiked(response.data.isLiked || false);
+        const { heading, subheading, content, likes, isLiked, likeCount } = response.data;
+        console.log('likeCount:', likeCount);
+        setBlogPost({ heading, subheading, content });
+        setLikes(likeCount || 0); // Use likeCount for consistency
+        setIsLiked(isLiked || false);
       } catch (error) {
         console.error('Error fetching blog post:', error);
       }
     };
-
+    
     const fetchLikes = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/post/${id}`);
-        setLikes(response.data.likes || 0);
+        setLikes(response.data.likeCount || 0); // Update likes based on likeCount
       } catch (error) {
         console.error('Error fetching likes:', error);
         toast.error('Failed to fetch likes', {
@@ -41,7 +43,7 @@ const BlogDetails = () => {
         setLikes(blogPost?.likes || 0); // Use the initial like count from the blog post
       }
     };
-
+    
     const fetchImage = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/file/${id}`);
@@ -73,25 +75,22 @@ const BlogDetails = () => {
     try {
       const authToken = sessionStorage.getItem('accessToken');
       if (!authToken) {
-        // Handle case where authToken is not available
         console.error('Auth token not found in sessionStorage.');
         return;
       }
   
       const response = await axios.get(`http://localhost:8000/like/${id}`, {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          authorization: authToken,
         },
       });
   
-      // Assuming your API returns a success message upon successful like
       if (response.data.message === 'Post liked successfully') {
-        // Update the UI or perform any necessary actions after liking the post
-        // For example, update the like count or show a success message
-        toast.success('Post liked successfully!', {
+  
+        toast.success(`Post liked successfully!`, {
           duration: 5000,
         });
-        // Update the like count and isLiked state
+  
         setLikes((prevLikes) => prevLikes + 1);
         setIsLiked(true);
       } else {
@@ -106,8 +105,6 @@ const BlogDetails = () => {
       });
     }
   };
-  
-  
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -151,44 +148,21 @@ const BlogDetails = () => {
                 </div>
               )}
 
+              {/* Like button */}
+              <Divider />
+              <Box mt={4} mb={2} display="flex" alignItems="center">
+                <IconButton className={`like-button ${isLiked ? 'liked' : ''}`} onClick={handleLike}>
+                  <FaThumbsUp />
+                </IconButton>
+                <Typography variant="body2" ml={1}>
+                  {likes} Likes
+                </Typography>
+              </Box>
+              <Divider />
               <Divider />
 
               <Box mt={4} display="flex" alignItems="center" justifyContent="space-between">
-                <Box display="flex" alignItems="center">
-                  {blogPost.articalauthor && (
-                    <>
-                      <Avatar>{blogPost.articalauthor.charAt(0)}</Avatar>
-                      <Typography variant="body2" ml={2}>
-                        {blogPost.articalauthor}
-                      </Typography>
-                    </>
-                  )}
-                </Box>
-
-                <Box display="flex" alignItems="center">
-                  <FaCalendarAlt />
-                  <Typography variant="body2" ml={1}>
-                    {blogPost.publishdate}
-                  </Typography>
-                </Box>
-
-                <Box display="flex" alignItems="center">
-                  <IconButton className={`like-button ${isLiked ? 'liked' : ''}`} onClick={handleLike}>
-                    <FaThumbsUp />
-                  </IconButton>
-                  <Typography variant="body2" ml={1}>
-                    {likes} Likes
-                  </Typography>
-                </Box>
-
-                <Box display="flex" alignItems="center">
-                  <Button className="share-button" onClick={handleShare}>
-                    <FaShareAlt />
-                    <Typography variant="body2" ml={1}>
-                      Share
-                    </Typography>
-                  </Button>
-                </Box>
+                {/* Other content */}
               </Box>
             </Paper>
           </Grid>
