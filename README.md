@@ -7,16 +7,27 @@ Unique Selling Proposition (USP)
 The uniqueness of this product lies in its utilization of blockchain technology. Every piece of content published on the platform is stored on the blockchain, ensuring that the author's rights are reserved. This ensures the authenticity and ownership of the content, as well as provides a transparent and immutable record of creative works.
 
 Features
+
+
 1. Content Types
 Blog: Platform allows users to publish blog posts on various topics.
 Article: Users can publish research articles on the platform.
 Research: Research papers can be shared and accessed securely.
 Podcast: Podcasts can be uploaded and shared with the audience.
-2. Server Architecture
-Blockchain Server: Contains stateful smart contracts and necessary APIs. Running on port 5000, it facilitates various operations including publishing articles (/mint), liking content (/like), and sending critical data (/senddata).
+
+
+
+3. Server Architecture
+Blockchain Server: Contains stateful smart contracts and necessary APIs. Running on port 5000, it facilitates various operations including publishing articles (/mint),
+liking content (/like),
+and sending critical data (/senddata).
+
+
 Backend Server: Communicates with the blockchain server for user authentication. Running on port 8000, it ensures secure interactions between users and the blockchain.
 Client: Frontend interface of the project, providing users with access to published content and interaction features.
-3. Starting the Application
+
+
+5. Starting the Application
 To start the blockchain:
 
 bash
@@ -78,6 +89,7 @@ Response
 Status Code: 200 OK on success.
 Response Body:
 JSON object confirming successful minting of the article.
+
 2. Sending Files
 Endpoint: POST /custom/sendfile
 
@@ -93,6 +105,7 @@ Response
 Status Code: 200 OK on success.
 Response Body:
 JSON object confirming successful file upload.
+
 3. Getting Data
 Endpoint: GET /custom/data
 
