@@ -133,6 +133,7 @@ Response
 Status Code: 200 OK on success.
 Response Body:
 JSON object confirming successful liking of the content.
+
 5. Health Check
 Endpoint: GET /health
 
