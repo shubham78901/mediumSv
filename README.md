@@ -31,25 +31,41 @@ Client: Frontend interface of the project, providing users with access to publis
 To start the blockchain:
 
 bash
+
 Copy code
+
 cd blockchainserver
+
 npm i
+
 npm run compile
+
 npx ts-node server.ts
+
 To start the backend server:
 
 bash
+
 Copy code
+
 cd server
+
 npm i
+
 npm start
+
 To start the client:
 
 bash
+
 Copy code
+
 cd client 
+
 npm i
+
 npm run start
+
 4. Wallet and Authentication
 The project utilizes Neucron wallet for paying transaction fees and user authentication.
 
@@ -57,6 +73,7 @@ The project utilizes Neucron wallet for paying transaction fees and user authent
 For testing purposes, use the following credentials:
 
 Email: ss363757@gmail.com
+
 Password: Shubham123
 Note:
 Ensure that MongoDB shell is running, as it stores side information and user data.
