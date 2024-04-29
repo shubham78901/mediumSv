@@ -41,9 +41,12 @@ npm i
 npm run compile
 
 npx ts-node server.ts
+
 ..
 
 ...
+
+
 To start the backend server:
 
 bash
@@ -55,8 +58,13 @@ cd server
 npm i
 
 npm start
+
+
 ...
+
 ...
+
+
 To start the client:
 
 bash
@@ -68,6 +76,10 @@ cd client
 npm i
 
 npm run start
+
+...
+
+....
 
 4. Wallet and Authentication
 The project utilizes Neucron wallet for paying transaction fees and user authentication.
