@@ -41,7 +41,9 @@ npm i
 npm run compile
 
 npx ts-node server.ts
+..
 
+...
 To start the backend server:
 
 bash
@@ -53,7 +55,8 @@ cd server
 npm i
 
 npm start
-
+...
+...
 To start the client:
 
 bash
@@ -75,6 +78,9 @@ For testing purposes, use the following credentials:
 Email: ss363757@gmail.com
 
 Password: Shubham123
+
+
+
 Note:
 Ensure that MongoDB shell is running, as it stores side information and user data.
 
